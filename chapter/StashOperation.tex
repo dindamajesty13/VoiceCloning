@@ -1,0 +1,450 @@
+\section{Penjelasan}
+
+Salah satu fitur menarik di Git adalah \textit{stashing}.   Dengan 
+melakukan\textit{stashing}, developer dapat dengan mudah '\textit{
+melenyapkan}' perubahan kode program, melakukan perubahan lain, lalu 
+kembali lagi ke kode program yang sebelumnya dikerjakan.   
+Langkah-langkah tersebut sebenarnya dapat diwakili oleh beberapa 
+perintah Git lainnya, tapi \textit{stashing} membuatnya menjadi 
+mudah karena hanya perlu memanggil satu perintah.\vspace{14pt}
+
+Sebagai contoh, saya akan menggunakan Git yang diakses melalui IntelliJ 
+IDEA.   Saya membuat sebuah proyek Groovy baru dengan nama\textit{
+latihan}.   Lalu saya membuat sebuah script Groovy sederhana bernama
+\textit{Latihan.groovy}untuk menghitung sisa inventory secara FIFO, 
+seperti berikut ini:\vspace{14pt}
+
+
+  List  pembelian = [10, 20, 30, 40]\par 
+  List penjualan = [5, 6, 3, 2, 
+1, 3]\par
+ println stokFifo(pembelian, hitungTotal(pembelian, 
+penjualan))\par 
+ int hitungTotal(List pembelian, List penjualan) 
+\{\par  
+ pembelian.sum() - penjualan.sum()\}\par 
+ List stokFifo(List pembelian, 
+int sisa) \{\par    
+ List hasil = []\par    
+ pembelian.each \{ int jumlah 
+->\par        if (sisa $>$ 0) \{\par            int delta = (jumlah $>$= 
+sisa)? jumlah: sisa  // BUG YANG DISENGAJA!\par            sisa -= 
+delta\par            hasil $<$$<$ delta\par        \}\par    \}\par    hasil\par\} \vspace{14pt}
+
+Untuk menambahkan proyek ke dalam repository Git, pilih menu VCS, Import into Version Control,Create Git Repository.\vspace{14pt}
+
+Pada kotak dialog yang muncul, pilih untuk 
+meletakkan repository bersamaan dengan lokasi proyek dan kemudian 
+men-klik tombol OK.\vspace{14pt}
+
+Kemudian, klik kanan pada file Latihan.groovy, memilih menu Git, Add\vspace{14pt}
+
+Sekarang file tersebut telah berada di lokasi index atau staging dari 
+Git.   Berikutnya, commit perubahan.   Caranya adalah 
+dengan memilih menu VCS, Commit Changes.\vspace{14pt}
+
+Pilih tombol Commit untuk menyimpan perubahan dalam 
+repository Git lokal.   Saat IntelliJ IDEA memunculkan dialog mengenai 
+file lain yang tidak ikut di-commit, pilih No.\vspace{14pt}
+
+Anggap saja ini adalah sebuah aplikasi yang dikembangkan bersama dengan 
+developer lain, yaitu xXx.   xXx tersebut telah men-\textit{
+fetch} repository saya dari remote/upstream, kemudian ia akan 
+men-develop kode program yang berhubungan dengan kode program saya di 
+atas.\vspace{14pt}
+
+Tentu saja saya juga tidak ingin ketinggalan sibuk.   Saya menambahkan 
+harga dan perhitungan laba pada kode program saya. saya menulis kode program berikut ini:
+\begin{equation}
+Map pembelian = [10: 10000, 20: 10100, 30: 10200, 40: 11000]
+\end{equation}
+\vspace{12pt}
+Map penjualan = [5: 12000, 6: 13000, 3: 11000, 2: 11000, 1: 15000, 3: 12000]
+println stokFifo(pembelian, 
+hitungTotal(pembelian.keySet().toList(),
+penjualan.keySet().toList()))\par 
+int hitungTotal(List pembelian,
+List
+penjualan) {\par    pembelian.sum() - penjualan.sum()\par
+}\par 
+List stokFifo(Map 
+pembelian, int sisa) {\par    List hasil = []\par    pembelian.each \{ 
+jumlah, hargaBeli ->\par       if (sisa > 0) {\par            int delta = 
+(jumlah >= sisa)? jumlah: sisa  // BUG YANG DISENGAJA!\par            sisa 
+-= delta\par            hasil << [delta, 
+hargaBeli]\par        \}\par    \}\par    hasil\par \}\par int hitungProfit(List stokFifo, Map penjualan)\par \vspace{14pt} 
+Saya belum selesai mengetik, bahkan belum sempat menjalankan kode 
+program ketika tiba-tiba telepon berdering.   Suara xXx terdengar 
+sangat panik.   Dia mengatakan bahwa 30 menit lagi dirinya harus 
+memberikan presentasi ke pengguna, tapi ada yang aneh dengan perhitungan 
+inventory buatan saya!   xXx menemukan sebuah kesalahan.  Lebih dari 
+itu, xXx meminta saya untuk segera memperbaikinya secepat mungkin 
+sehingga dia bisa men-pull perbaikan dari saya!\vspace{14pt}
+
+Masalahnya: saya sudah mengubah banyak kode program tersebut sehingga 
+tidak sama lagi seperti yang dipakai oleh Lena.   Saya tidak ingin 
+menghapus perubahan yang sudah saya buat sejauh ini karena nantinya 
+perubahan ini pasti akan dipakai.\vspace{14pt}
+
+Salah satu solusi yang dapat saya pakai adalah dengan memakai 
+fasilitas stashing di Git.   Saya memilih menu VCS, Git, Stash Changes\vspace{14pt}
+
+Setelah men-klik tombol Create Stash, isi kode program saya 
+secara ajaib kembali lagi seperti semula!  Sama persis seperti commit 
+terakhir yang dirujuk oleh HEAD.   Saya segera memanfaatkan kesempatan 
+ini untuk mencari dan memperbaiki kesalahan yang ditemukan xXx:\vspace{14pt}
+
+ List  pembelian = $[$10, 20, 30, 40$]$List penjualan = $[$5, 6, 3, 2, 
+1, 3$]$println stokFifo(pembelian, hitungTotal(pembelian, 
+penjualan)) int hitungTotal(List pembelian, List penjualan) 
+\{    pembelian.sum() - penjualan.sum()\} List stokFifo(List pembelian, 
+int sisa) \{    List hasil = $[$$]$    pembelian.each \{ int jumlah 
+-$>$        if (sisa $>$ 0) \{            int delta = (jumlah $>$= 
+sisa)? sisa: jumlah            sisa -= delta            hasil $<$$<$ 
+delta        \}    \}    hasil\}\vspace{14pt}
+
+Saya segera men-commit perubahan dengan memilih menu\textbf{VCS},
+\textbf{Commit Changes\ldots }.   Pada komentar, saya mengisi dengan 
+'Perbaikan perhitungan sisa inventory yang salah.' dan men-klik tombol
+\textbf{Commit}.   Saya kemudian men-\textit{push} perubahan ke
+\textit{upstream}, sehingga Lena bisa men-\textit{pull} perubahan 
+dari saya.   Tidak lama kemudian suara Lena terdengar lega seolah-olah 
+baru saja luput dari malapetaka.  Ia memberitahukan bahwa kini semuanya 
+baik-baik saja.\vspace{14pt}
+
+Lalu bagaimana dengan kode program yang sedang saya '\textit{ketik}' 
+sebelum menerima telepon dari Lena?  Kemana perginya?   Saya bisa 
+mengembalikannya dengan memilih menu\textbf{VCS},\textbf{Git}
+,\textbf{UnStash Changes\ldots }.   Pada kotak dialog yang muncul, 
+saya men-klik tombol\textbf{Pop Stash}\vspace{14pt}
+
+Kode program saya akan kembali seperti terakhir kali:
+
+ Map pembelian = $[$10: 10000, 20: 10100, 30: 10200, 40: 11000$]$Map 
+penjualan = $[$5: 12000, 6: 13000, 3: 11000, 2: 11000, 1: 15000, 3: 
+12000$]$println stokFifo(pembelian, 
+hitungTotal(pembelian.keySet().toList(), 
+penjualan.keySet().toList())) int hitungTotal(List pembelian, List 
+penjualan) \{    pembelian.sum() - penjualan.sum()\} List stokFifo(Map 
+pembelian, int sisa) \{    List hasil = $[$$]$    pembelian.each \{ 
+jumlah, hargaBeli -$>$        if (sisa $>$ 0) \{            int delta = 
+(jumlah $>$= sisa)? sisa: jumlah            sisa -= 
+delta            hasil $<$$<$ $[$delta, 
+hargaBeli$]$        \}    \}    hasil\} int hitungProfit(List stokFifo, 
+Map penjualan) \{    def \\
+
+Tunggu dulu!  Tidak persis sama seperti terakhir kali!!  Fasilitas
+\textit{stashing} bukan saja hanya mengembalikan kode program 
+sebelumnya, tetapi juga melakukan merging dengan perubahan saat ini.   
+Perbaikan yang diminta oleh Lena tidak hilang setelah saya men-pop 
+stash.\vspace{14pt}
+
+Pada contoh ini, hanya terdapat satu file yang berubah.   Fasilitas 
+stashing akan semakin berguna bila perubahan telah dilakukan pada banyak 
+file yang berbeda.  Tanpa Git dan\textit{stashing}, pada kasus ini, 
+saya harus memakai cara manual yang lebih repot seperti memberikan 
+komentar atau mengedit file untuk sementara.\vspace{14pt}
+
+\subsection{Membatalkan Apapun}
+
+Pada setiap tahapan, Anda mungkin ingin membatalkan sesuatu. Di sini, 
+kita akan membahas beberapa alat dasar untuk membatalkan perubahan yang 
+baru saja Anda lakukan. Harus tetap diingat bahwa kita tidak selalu 
+dapat membatalkan apa yang telah kita batalkan. Ini adalah salah satu 
+area dalam Git yang dapat membuat Anda kehilangan apa yang telah Anda 
+kerjakan jika Anda melakukannya dengan tidak tepat.\vspace{14pt}
+
+\textbf{Merubah Commit Terakhir Anda}\vspace{14pt}
+
+Salah satu pembatalan yang biasa dilakukan adalah ketika kita melakukan 
+commit terlalu cepat dan mungkin terjadi lupa untuk menambah beberapa 
+berkas, atau Anda salah memberikan pesan commit Anda. Jika Anda ingin 
+untuk mengulang commit tersebut, Anda dapat menjalankan commit dengan 
+opsi --ammend:\vspace{14pt}
+
+\$ git commit --amend\vspace{14pt}
+
+Perintah ini mangambil area stage Anda dan menggunakannya untuk commit. 
+Jika Anda tidak melakukan perubahan apapun sejak commit terakhir Anda 
+(seumpama, Anda menjalankan perintah ini langsung setelah commit Anda 
+sebelumnya), maka snapshot Anda akan sama persis dengan sebelumnya dan 
+yang Anda dapat ubah hanyalah pesan commit Anda.\vspace{14pt}
+
+Pengolah kata akan dijalankan untuk mengedit pesan commit yang telah 
+Anda buat pada commit sebelumnya. Anda dapat ubah pesan commit ini 
+seperti biasa, tetapi pesan commit sebelumnya akan tertimpa.\vspace{14pt}
+
+Sebagai contoh, jika Anda melakukan commit dan menyadari bahwa Anda lupa 
+untuk memasukkan beberapa perubahan dalam sebuah berkas ke area stage 
+dan Anda ingin untuk menambahkan perubahan ini ke dalam commit terakhir, 
+Anda dapat melakukannya sebagai berikut:\vspace{14pt}
+
+\begin{verbatim}
+
+\$ git commit -m 'initial commit'\vspace{14pt}
+
+\$ git add forgotten\_file\vspace{14pt}
+
+\$ git commit --amend\vspace{14pt}
+\end{verbatim}
+
+Ketiga perintah ini tetap akan bekerja di satu commit - commit kedua 
+akan menggantikan hasil dari commit pertama.\vspace{14pt}
+
+\textbf{Mengeluarkan Berkas dari Area Stage}\vspace{14pt}
+
+Dua seksi berikutnya akan menunjukkan bagaimana menangani area stage 
+Anda dan perubahan terhadap direktori kerja Anda. Sisi baiknya adalah 
+perintah yang Anda gunakan untuk menentukan keadaan dari kedua area 
+tersebut juga mengingatkan Anda bagaimana membatalkan perubahannya. 
+Sebagai contoh, mari kita anggap Anda telah merubah dua berkas dan ingin 
+melakukan commit kepada keduanya sebagai dua perubahan terpisah, tetapi 
+Anda secara tidak sengaja mengetikkan git add * dan memasukkan keduanya 
+ke dalam area stage. Bagaimana Anda dapat mengeluarkan salah satu dari 
+keduanya? Perintah git status mengingatkan Anda:\vspace{14pt}
+
+\$ git add\vspace{14pt}
+
+\$ git status\vspace{14pt}
+
+\# On branch master\vspace{14pt}
+
+\# Changes to be committed:\vspace{14pt}
+
+\# (use "git reset HEAD $<$file$>$..." to unstage)\vspace{14pt}
+
+\#
+
+\# modified: README.txt\vspace{14pt}
+
+\# modified: benchmarks.rb\vspace{14pt}
+
+\#
+
+Tepat di bawah tulisan "Changes to be committed", tercantum anjuran 
+untuk menggunakan git reset HEAD $<$file$>$ untuk mengeluarkan dari area 
+stage. Mari kita gunakan anjuran tersebut untuk mengeluarkan berkas 
+benchmarks.rb dari area stage:\vspace{14pt}
+
+\$ git reset HEAD benchmarks.rb 
+
+benchmarks.rb: locally modified\vspace{14pt}
+
+\$ git status\vspace{14pt}
+
+\# On branch master\vspace{14pt}
+
+\# Changes to be committed:\vspace{14pt}
+
+\# (use "git reset HEAD $<$file$>$..." to unstage)\vspace{14pt}
+
+\#
+
+\# modified: README.txt\vspace{14pt}
+
+\#
+
+\# Changes not staged for commit:\vspace{14pt}
+
+\# (use "git add $<$file$>$..." to update what will be committed)\vspace{14pt}
+
+\# (use "git checkout -- $<$file$>$..." to discard changes in working 
+directory)\vspace{14pt}
+
+\#
+
+\# modified: benchmarks.rb\vspace{14pt}
+
+\#
+
+Perintahnya terlihat agak aneh, tetapi menyelesaikan masalah. Berkas 
+benchmarks.rb sekarang menjadi terubah dan sudah berada di luar area 
+stage.\vspace{14pt}
+
+\textbf{Mengembalikan Berkas Terubah}\vspace{14pt}
+
+Apa yang terjadi jika Anda menyadari bahwa Anda tidak ingin menyimpan 
+perubahan terhadap berkas benchmarks.rb? Bgaimana kita dapat dengan 
+mudah mengembalikan berkas tersebut ke keadaan yang sama dengan saat 
+Anda melakukan commit terakhir (atau saat awal menduplikasi, atau 
+bagaimanapun Anda mendapatkannya ketika masuk ke direktori kerja Anda)? 
+Untungnya, git status memberitahu Anda lagi bagaimana untuk melakukan 
+hal itu. Pada contoh keluaran sebelumnya, area direktori kerja terlihat 
+seperti berikut:\vspace{14pt}
+
+\# Changes not staged for commit:\vspace{14pt}
+
+\# (use "git add $<$file$>$..." to update what will be committed)\vspace{14pt}
+
+\# (use "git checkout -- $<$file$>$..." to discard changes in working 
+directory)\vspace{14pt}
+
+\#
+
+\# modified: benchmarks.rb\vspace{14pt}
+
+\#\vspace{14pt}
+
+Terlihat secara eksplisit cara Anda dapat membuang perubahan yang telah 
+Anda lakukan (paling tidak, hanya versi Git 1.6.1 atau yang lebih baru 
+yang memperlihatkan cara ini - jika Anda memiliki versi yang lebih tua, 
+kami sangat merekomendasikan untuk memperbaharui Git untuk mendapatkan 
+fitur yang lebih nyaman digunakan). Mari kita lakukan apa yang tertulis 
+di atas:\vspace{14pt}
+
+\$ git checkout -- benchmarks.rb\vspace{14pt}
+
+\$ git status\vspace{14pt}
+
+\# On branch master\vspace{14pt}
+
+\# Changes to be committed:\vspace{14pt}
+
+\# (use "git reset HEAD $<$file$>$..." to unstage)\vspace{14pt}
+
+\#
+
+\# modified: README.txt\vspace{14pt}
+
+\#\vspace{14pt}
+
+Anda dapat lihat bahwa perubahan telah dikembalikan. Anda juga 
+seharusnya menyadari bahwa perintah ini juga berbahaya: perubahan apapun 
+yang Anda buat di berkas tersebut akan hilang - Anda baru saja menyalin 
+berkas lain ke perubahan Anda. Jangan pernah gunakan perintah ini 
+kecuali Anda sangat yakin bahwa Anda tidak menginginkan berkas tersebut. 
+Jika Anda hanya butuh untuk menyingkirkan perubahan untuk sementara, 
+kita dapat bahas tentang penyimpanan (\textit{to stash}) dan 
+pencabangan (\textit{to branch}) di bab berikutnya; kedua cara 
+tersebut secara umum adalah cara yang lebih baik untuk dilakukan.\vspace{14pt}
+
+Ingat bahwa apapun yang dicommit di dalam Git dapat hampir selalu 
+dikembalikan. Bahkan commit yang berada di cabang yang sudah terhapus 
+ataupun commit yang sudah ditimpa dengan commit --amendmasih dapat 
+dikembalikan. Namun, apapun hilang yang belum pernah dicommit besar 
+kumngkinannya tidak dapat dilihat kembali.\vspace{14pt}
+
+
+
+\section{Sistem Kontrol Versi}
+\ref{stash.jpg}:
+\begin{figure}[ht]
+	\centerline{\includegraphics[width=10cm,height=7cm]{Figures/stash.jpg}}
+	\caption{Version Control System}
+	\label{stash.jpg}
+\end{figure}
+
+Version Control System (VCS) adalah perangkat lunak yang membantu 
+pengembang perangkat lunak untuk bekerja sama dan menjaga sejarah 
+lengkap dari pekerjaan mereka.
+
+\begin{table}[ht]
+	\caption{Fungsi VCS}
+	\centering
+	\begin{tabular}{cccc}
+		\hline
+		No&Keterangan&\\
+		\hline
+		.1&Memungkinkan pengembang untuk bekerja secara bersamaan&\\
+		.2&Tidak memungkinkan Timpa perubahan masing-masing&\\
+		.3&Mempertahankan sejarah setiap versi&\\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+Berikut ini adalah jenis VCS:
+
+\begin{itemize}
+\item sistem kontrol versi terpusat (CVCS).
+\item Didistribusikan / Desentralisasi sistem kontrol versi (DVCS).
+\end{itemize}
+Dalam bab ini, kita akan berkonsentrasi hanya pada sistem kontrol versi 
+didistribusikan dan terutama pada Git. Git berada di bawah sistem 
+kontrol versi terdistribusi.
+
+\subsection{Distributed Sistem Kontrol Versi}
+sistem terpusat kontrol versi (CVCS) menggunakan server pusat untuk 
+menyimpan semua file dan memungkinkan kolaborasi tim. Tapi kelemahan 
+utama dari CVCS adalah titik tunggal kegagalan, yaitu, kegagalan server 
+pusat. Sayangnya, jika server pusat turun selama satu jam, kemudian pada 
+jam itu, tidak ada yang bisa berkolaborasi sama sekali. Dan bahkan dalam 
+kasus terburuk, jika disk server pusat akan rusak dan cadangan yang 
+tepat belum diambil, maka Anda akan kehilangan seluruh sejarah proyek. 
+Di sini, sistem terdistribusi kontrol versi (DVCS) datang ke dalam 
+gambar.\vspace{14pt}
+
+DVCS klien tidak hanya memeriksa snapshot terbaru dari direktori tetapi 
+mereka juga penuh dari repositori tersebut. Jika memutuskan turun, maka 
+repositori dari klien dapat disalin kembali ke server untuk 
+mengembalikannya. Setiap checkout adalah salinan lengkap dari 
+repositori. Git tidak bergantung pada server pusat dan itulah sebabnya 
+Anda dapat melakukan banyak operasi ketika Anda sedang offline. Anda 
+dapat melakukan perubahan, membuat cabang, lihat log, dan melakukan 
+operasi lain ketika Anda sedang offline. Anda memerlukan koneksi 
+jaringan hanya untuk mempublikasikan perubahan dan mengambil perubahan 
+terbaru.
+
+\subsection{Keuntungan dari Git}\vspace{14pt}
+
+{\textbf{free dan open source}}\vspace{14pt}
+
+Git dirilis di bawah lisensi open source GPL ini. Ini tersedia secara 
+bebas melalui internet. Anda dapat menggunakan Git untuk mengelola 
+proyek kepatutan tanpa membayar satu sen dolar. Karena merupakan open 
+source, Anda dapat men-download kode sumbernya dan juga melakukan 
+perubahan sesuai dengan kebutuhan Anda.\vspace{14pt}
+
+
+{\textbf{Cepat dan kecil}}\vspace{14pt}
+
+Karena sebagian besar operasi dilakukan secara lokal, memberikan manfaat 
+yang sangat besar dalam hal kecepatan. Git tidak bergantung pada server 
+pusat; itu sebabnya, tidak ada kebutuhan untuk berinteraksi dengan 
+server remote untuk setiap operasi. Bagian inti dari Git ditulis dalam 
+C, yang menghindari overhead runtime yang terkait dengan bahasa tingkat 
+tinggi lainnya. Meskipun Git cermin seluruh repositori, ukuran data di 
+sisi client kecil. Ini menggambarkan efisiensi Git di mengompresi dan 
+menyimpan data di sisi client.\vspace{14pt}
+
+
+	{\textbf{backup implisit}}\vspace{14pt}
+
+Kemungkinan kehilangan data sangat jarang ketika ada beberapa salinan 
+dari itu. Data hadir di setiap sisi klien cermin repositori, karena itu 
+dapat digunakan dalam hal terjadi kecelakaan atau korupsi disk.\vspace{14pt}
+
+
+{\textbf{Keamanan}}\vspace{14pt}
+
+Git menggunakan fungsi hash kriptografi umum yang disebut fungsi hash 
+aman (SHA1), untuk nama dan mengidentifikasi objek dalam database. 
+Setiap file dan komit check-dijumlahkan dan diambil oleh checksum-nya 
+pada saat checkout. Ini menyiratkan bahwa, tidak mungkin untuk mengubah 
+file, tanggal, dan pesan komit dan data lainnya dari database Git tanpa 
+mengetahui Git.\vspace{14pt}
+
+
+	{\textbf{Tidak perlu perangkat keras yang kuat}}\vspace{14pt}
+
+Dalam kasus CVCS, server pusat harus cukup kuat untuk melayani 
+permintaan dari seluruh tim. Untuk tim yang lebih kecil, itu tidak 
+masalah, tetapi sebagai ukuran tim tumbuh, keterbatasan hardware server 
+dapat menjadi hambatan kinerja. Dalam kasus DVCS, pengembang tidak 
+berinteraksi dengan server kecuali mereka butuhkan untuk mendorong atau 
+menarik perubahan. Semua angkat berat terjadi pada sisi klien, sehingga 
+hardware server dapat memang sangat sederhana.\vspace{14pt}
+
+
+{\textbf{percabangan mudah}\vspace{14pt}
+
+CVCS menggunakan mekanisme copy murah, Jika kita membuat cabang baru, 
+itu akan menyalin semua kode ke cabang baru, sehingga memakan waktu dan 
+tidak efisien. Juga, penghapusan dan penggabungan cabang di CVCS rumit 
+dan memakan waktu. Tapi manajemen cabang dengan Git sangat sederhana. 
+Dibutuhkan hanya beberapa detik untuk membuat, menghapus, dan 
+menggabungkan cabang.
+
+
+
+

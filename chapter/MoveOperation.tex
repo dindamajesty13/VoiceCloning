@@ -1,0 +1,549 @@
+\section{Move Operation}
+\hspace*{0.5in}Seperti namanya, operasi memindahkan direktori atau file dari satu lokasi ke lokasi lain. direktori yang dimodifikasi akan muncul sebagai berikut: \par
+\vspace{10pt}
+\begin{verbatim}
+[tom@CentOS project] $  \$  $ pwd} 
+
+/home/tom/project} 
+[tom@CentOS project] $  \$  $ ls} 
+
+{README string string.c} 
+[tom@CentOS project] $  \$  $ mkdir src
+
+[tom@CentOS project] $  \$  $ git mv string.c src/} 
+
+[tom@CentOS project] $  \$  $ git status -s
+
+R string.c  $ - $> src/string.c
+
+?? string}
+\end{verbatim}
+
+\vspace{10pt}
+\hspace*{0.5in} Untuk membuat perubahan ini permanen, harus mendorong struktur direktori yang dimodifikasi ke repositori jauh sehingga pengembang lain dapat melihat ini. \par
+
+\noindent 
+[tom@CentOS project] $  \$  $ git commit -m "Modified directory structure" \par
+\vspace{12pt}
+\noindent 
+[master 7d9ea97] Modified directory structure \par
+\noindent 
+1 files changed, 0 insertions(+), 0 deletions(-) \par
+\noindent 
+rename string.c => src/string.c (100 $  \%  $) \par
+\vspace{12pt}
+\noindent 
+[tom@CentOS project] $  \$  $ git push origin master \par
+\noindent 
+Counting objects: 4, done. \par
+\noindent 
+Compressing objects: 100 $  \%  $ (2/2), done. \par
+\noindent 
+Writing objects: 100 $  \%  $ (3/3), 320 bytes, done. \par
+\noindent 
+Total 3 (delta 0), reused 0 (delta 0) \par
+\noindent 
+To gituser@git.server.com:project.git \par
+\noindent 
+e86f062..7d9ea97 master  $ - $> master \par
+
+\vspace{12pt}
+\hspace*{0.5in} Di gudang lokal Jerry, sebelum operasi penarikan, ia akan menunjukkan struktur direktori lama. \par
+
+\vspace{12pt}
+\noindent 
+[jerry@CentOS project] $  \$  $ pwd \par
+\noindent 
+/home/jerry/jerry $  \_  $repo/project \par
+\vspace{12pt}
+\noindent 
+[jerry@CentOS project] $  \$  $ ls \par
+\noindent 
+README string string.c \par
+
+\vspace{12pt}
+\noindent 
+ \hspace*{0.5in} Tapi setelah operasi tarik, struktur direktori akan diperbarui. Sekarang, Jerry bisa melihat direktori src dan file yang ada di dalam direktori itu. \par
+\noindent 
+[jerry@CentOS project] $  \$  $ git pull \par
+\noindent 
+remote: Counting objects: 4, done. \par
+\noindent 
+remote: Compressing objects: 100 $  \%  $ (2/2), done. \par
+\noindent 
+remote: Total 3 (delta 0), reused 0 (delta 0) \par
+\noindent 
+Unpacking objects: 100 $  \%  $ (3/3), done. \par
+\noindent 
+From git.server.com:project \par
+\noindent 
+e86f062..7d9ea97 master  $ - $> origin/master \par
+\noindent 
+First, rewinding head to replay your work on top of it... \par
+\noindent 
+Fast-forwarded master to 7d9ea97683da90bcdb87c28ec9b4f64160673c8a. \par
+\vspace{12pt}
+\noindent 
+[jerry@CentOS project] $  \$  $ ls \par
+\noindent 
+README src string \par
+\vspace{12pt}
+\noindent 
+[jerry@CentOS project] $  \$  $ ls src/ \par
+\noindent 
+string.c \par
+
+\subsection{Semua Operasi Dilakukan Secara Lokal}
+\par
+\hspace*{0.5in} Kebanyakan operasi pada Git hanya membutuhkan berkas-berkas dan resource lokal – tidak ada informasi yang dibutuhkan dari komputer lain pada jaringan. Jika terbiasa dengan VCS terpusat dimana kebanyakan operasi memiliki overhead latensi jaringan, aspek Git satu ini akan membuat berpikir bahwa para dewa kecepatan telah memberkati Git dengan kekuatan. Karena memiliki seluruh sejarah dari proyek di lokal disk, dengan kebanyakan operasi yang tampak hampir seketika. \par
+\hspace*{0.5in} Sebagai contoh, untuk melihat history dari proyek, Git tidak membutuhkan data histori dari server untuk kemudian menampilkannya untuk, namun secara sedarhana Git membaca historinya langsung dari basisdata lokal proyek tersebut. Ini berarti melihat histori proyek hampir secara instant. Jika ingin membandingkan perubahan pada sebuah berkas antara versi saat ini dengan versi sebulan yang lalu, Git dapat mencari berkas yang sama pada sebulan yang lalu dan melakukan pembandingan perubahan secara lokal, bukan dengan cara meminta remote server melakukannya atau meminta server mengirimkan berkas versi yang lebih lama kemudian membandingkannya secara lokal. \par
+\hspace*{0.5in} Hal ini berarti bahwa sangat sedikit yang tidak bisa kerjakan jika sedang offline atau berada diluar VPN. Jika sedang berada dalam pesawat terbang atau sebuah kereta dan ingin melakukan pekerjaan kecil, dapat melakukan commit sampai memperoleh koneksi internet hingga dapat menguploadnya. Jika pulang ke rumah dan VPN client tidak bekerja dengan benar, tetap dapat bekerja. Pada kebanyakan sistem lainnya, melakukan hal ini cukup sulit atau bahkan tidak mungkin sama sekali. Pada Perforce misalnya, tidak dapat berbuat banyak ketika tidak terhubung dengan server; pada Subversion dan CVS,  dapat mengubah berkas, tapi tidak dapat melakukan commit pada basisdata (karena tidak terhubung dengan basisdata). Hal ini mungkin saja bukanlah masalah yang besar, namun akan terkejut dengan perbedaan besar yang disebabkannya. \par
+
+\subsection{Git Memiliki Integritas }
+\par
+\hspace*{0.5in} Segala sesuatu pada Git akan melalui proses checksum terlebih dahulu sebelum disimpan yang kemudian direferensikan oleh hasil checksum tersebut. Hal ini berarti tidak mungkin melakukan perubahan terhadap berkas manapun tanpa diketahui oleh Git. Fungsionalitas ini dimiliki oleh Git pada level terendahnya dan ini merupakan bagian tak terpisahkan dari filosofi Git. Tidak akan kehilangan informasi atau mendapatkan file yang cacat tanpa diketahui oleh Git. \par
+\hspace*{0.5in} Mekanisme checksum yang digunakan oleh Git adalah SHA-1 hash. Ini merupakan sebuah susunan string yang terdiri dari 40 karakter heksadesimal (0 hingga 9 dan a hingga f) dan dihitung berdasarkan isi dari sebuah berkas atau struktur direktori pada Git. sebuah hash SHA-1 berupa seperti berikut: \par
+\noindent 
+24b9da6552252987aa493b52f8696cd6d3b00373 \par
+\vspace{12pt}
+\hspace*{0.5in}Nilai seperti ini pada berbagai tempat di Git. Faktanya, Git tidak menyimpan nama berkas pada basisdatanya, melainkan nilai hash dari isi berkas. \par
+\hspace*{0.5in} Ketika melakukan operasi pada Git, kebanyakan dari operasi tersebut hanya menambahkan data pada basisdata Git. Seperti pada berbagai VCS, dapat kehilangan atau mengacaukan perubahan yang belum di-commit; namun jika melakukan commit pada Git akan sangat sulit kehilangannya, terutama jika  secara teratur melakukan push basisdata pada repositori lain. \par
+\hspace*{0.5in} Hal ini menjadikan Git menyenangkan karena kita dapat berexperimen tanpa kehawatiran untuk mengacaukan proyek. Git memiliki 3 keadaan utama dimana berkas dapat berada: committed, modified dan staged. Committed berarti data telah tersimpan secara aman pada basisdata lokal. Modified berarti telah melakukan perubahan pada berkas namun belum melakukan commit pada basisdata. Staged berarti telah menandai berkas yang telah diubah pada versi yang sedang berlangsung untuk kemudian dilakukan commit. \par
+\hspace*{0.5in} Direktori Git adalah dimana Git menyimpan metadata dan database objek untuk projek. Ini adalah bahagian terpenting dari Git, dan inilah yang disalin ketika melakukan kloning sebuah repository dari komputer lain. \par
+\noindent 
+\hspace*{0.5in} Direktori kerja adalah sebuah checkout tunggal dari satu versi dari projek. Berkas-berkas ini kemudian ditarik keluar dari basisdata yang terkompresi dalam direktori Git dan disimpan pada disk untuk gunakan atau modifikasi. \par
+\hspace*{0.5in} Staging area adalah sebuah berkas sederhana, umumnya berada dalam direktori Git, yang menyimpan informasi mengenai apa yang menjadi commit selanjutnya. Ini terkadang disebut sebagai index, tetapi semakin menjadi standard untuk menyebutnya sebagai staging area.Alur kerja dasar Git adalah seperti ini: \par
+\noindent 
+ \par
+\hspace*{0.5in} Jika sebuah versi tertentu dari sebuah berkas telah ada di direktori git dianggap 'committed'. Jika berkas diubah (modified) tetapi sudah ditambahkan ke staging area  maka itu adalah 'staged'. Dan jika berkas telah diubah sejak terakhir dilakukan checked out tetapi belum ditambahkan ke staging area maka itu adalah 'modified'.  \par
+
+\subsection*{13.3 Perintah Untuk Membuat Sebuah Proyek }
+\hspace*{0.5in} Membuat direktori baru di repositori Git dengan git init. Melakukan direktori setiap saat, benar-benar lokal. Executive git init dalam direktori, Membuat Git repositori. Sebagai contoh, buat item w3big:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ mkdir w3big} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ cd w3big/} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git init} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont Initialized empty Git repository in /Users/tianqixin/www/w3big/.git/} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \#  $ 在 /www/w3big/.git/ 目录初始化空 Git 仓库完毕。} \par
+\vspace{14pt}
+\hspace*{0.5in} Sekarang dapat melihat subdirektori git yang dihasilkan dalam proyek. Ini adalah repositori Git, dan semua data yang terkait dengan snapshot dari proyek disimpan di sini. \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont ls -a} \par
+
+\vspace{12pt}
+\hspace*{0.5in} Gunakan git clone repositori Git untuk salinan lokal, sehingga dapat melihat item atau memodifikasinya. Jika membutuhkan sebuah proyek kerjasama dengan orang lain atau ingin menyalin sebuah proyek, melihat kode, dapat mengkloning proyek. Jalankan:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont git clone [url]} \par
+\vspace{12pt}
+\noindent 
+Sebagai contoh, kloning proyek pada Github: \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git clone git@github.com:schacon/simplegit.git} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont Cloning into 'simplegit'...} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont remote: Counting objects: 13, done.} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont remote: Total 13 (delta 0), reused 0 (delta 0), pack-reused 13} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont Receiving objects: 100 $  \%  $ (13/13), done.} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont Resolving deltas: 100 $  \%  $ (2/2), done.} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont Checking connectivity... done.} \par
+\vspace{12pt}
+\noindent 
+\hspace*{0.5in} Setelah kloning selesai di direktori saat ini akan menghasilkan simplegit direktori:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ Cd simplegit /  $  \$  $ ls README Rakefile lib } \par
+\noindent 
+operasi akan menyalin semua catatan proyek.  \par
+\vspace{12pt}
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ ls -a} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont git~~~~ README   Rakefile lib} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ cd .git} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ ls} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont HEAD~~~~~~~~description~info~~~~~   packed-refs} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont branches~~~~hooks~~~~~~~logs~~~~~   refs} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont config~~~~~~index~~~~~  objects} \par
+\vspace{12pt}
+\hspace*{0.5in}Secara default, Git akan mengikuti nama URL yang tersedia item untuk membuat direktori proyek lokalditunjukkan. URL biasanya nama item terakhir / setelah. Jika ingin nama yang berbeda  dapat menambahkan nama yang inginkan setelah perintah. \par
+
+\subsection*{13.4 Snapshot Dasar }
+ \par
+\hspace*{0.5in} Pekerjaan Git adalah untuk membuat dan menyimpan snapshot dari proyek dan setelah snapshot dan membandingkan. Bab ini akan tentang menciptakan sebuah snapshot dari proyek  dan mengirimkan pengenalan perintah. Git add perintah untuk menambahkan file ke cache, seperti yang tambahkan dua file berikut: \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ touch README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ touch hello.php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ ls} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont README hello.php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git status -s} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont ?? README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont ?? hello.php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ } \par
+\vspace{12pt}
+\noindent 
+ \hspace*{0.5in}Perintah git status digunakan untuk melihat status proyek. Selanjutnya jalankan git add perintah untuk menambahkan file: } \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git add README hello.php } \par
+
+\vspace{12pt}
+\hspace*{0.5in} Sekarang jalankan git status, dapat melihat dua dokumen tersebut telah ditambahkan untuk pergi : \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git status -s} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont A~ README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont A~ hello.php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ } \par
+
+\vspace{12pt}
+\hspace*{0.5in} Proyek baru, menambahkan semua file yang sama, kita dapat menggunakangit add. Perintah untuk menambahkan semua file dalam proyek saat ini. Sekarang memodifikasi file README:   \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ vim README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont <pre>} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont <p>在 README 添加以下内容：<b> $  \#  $ w3big Git 测试</b>，然后保存退出。</p>} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont <p>再执行一下 git status：</p>} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git status -s} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont AM README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont A~ hello.php} \par
+\vspace{12pt}
+\hspace*{0.5in}"AM" status berarti bahwa file tersebut setelah kami menambahkannya ke cache ada perubahan. Setelah perubahan menjalankan git add perintah untuk menambahkannya ke cache: \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git add .} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git status -s} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont A~ README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont A~ hello.php} \par
+\vspace{12pt}
+\hspace*{0.5in} Bila ingin perubahan yang terkandung dalam snapshot laporan yang akan datang dalam waktu, harus menjalankan git add. \par
+\hspace*{0.5in} Git status untuk melihat setelah komit terakhir jika ada perubahan. Menunjukkan perintah ini ketika ditambahkan -s parameter untuk mendapatkan hasil yang singkat. Jika  tidak menambahkan parameter ini akan keluaran rinci:  \par
+\noindent 
+~  $  \$  $ git status \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont On branch master} \par
+\noindent 
+\vspace{10pt}
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont Initial commit} \par
+\noindent 
+\vspace{10pt}
+
+\vspace{80pt}
+{\fontsize{10pt}{10pt}\selectfont Changes to be committed:} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont ~ (use "git rm --cached <file>..." to unstage)} \par
+\noindent 
+\vspace{10pt}
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  \hspace*{0.64in} new~file:~  README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  \hspace*{0.64in} new~file:~  hello.php} \par
+\vspace{12pt}
+\hspace*{0.5in} Status git diff git eksekutif untuk melihat rincian hasil eksekusi. Git perintah diff dan menampilkan cache write telah dimodifikasi tapi belum ditulis ke cache perubahan perbedaan. git diff Ada dua skenario utama.  \par
+\noindent 
+\begin{itemize}
+\item Perubahan tidak cache:diff git  \par
+\noindent 
+\item Lihatperubahan cache: git diff --cached \par
+\noindent 
+\item Lihat cache dan uncached semuaperubahan: git diff KEPALA \par
+\noindent 
+\item Tampilkan ringkasan daripada seluruhdiff: git diff --stat\end{itemize}
+ \par
+ 
+
+\vspace{12pt}
+\noindent 
+Masukkan berikut dalam file hello.php:  \par
+\begin{verbatim}
+<?php
+echo 'www.w3big.com';
+?>
+git status -s
+A README
+AM hello.php
+git diff
+diff --git a/hello.php b/hello.php
+index e69de29..69b5711 100644
+--- a/hello.php
++++ b/hello.php
+@@ -0,0 +1,3 @@
++<?php
++echo '：www.w3big.com';
++?>
+\end{verbatim}
+
+\vspace{10pt}
+\hspace*{0.5in}Menampilkan status git pada untuk berubah setelah update atau menulis garis perubahan cache dengan garis dan git diff menunjukkan secara spesifik apa perubahan tersebut.  Selanjutnya melihat git berikutnya diff pelaksanaan --cached hasil:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git add hello.php } \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git status -s} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont A~ README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont A~ hello.php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git diff --cached} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont diff --git a/README b/README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont new file mode 100644} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont index 0000000..8f87495} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont --- /dev/null} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont +++ b/README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont @@ -0,0 +1 @@} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont + $  \#  $ w3big Git 测试} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont diff --git a/hello.php b/hello.php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont new file mode 100644} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont index 0000000..69b5711} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont --- /dev/null} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont +++ b/hello.php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont @@ -0,0 +1,3 @@} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont +<?php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont +echo '本教程：www.w3big.com';} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont +?>} \par
+\vspace{12pt}
+\hspace*{0.5in} Gunakan git menambahkan perintah ingin menulis isi dari buffer snapshot, dan mengeksekusi git commit akan menambahkan konten ke gudang penyangga. Git mengirimkan masing-masing nama dan alamat e-mail yang tercatat, sehingga langkah pertama perlu mengkonfigurasi nama pengguna dan alamat e-mail.  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git config --global user.name 'w3big'} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git config --global user.email test@w3big.com} \par
+\vspace{12pt}
+\hspace*{0.5in} Berikutnya menulis caching, dan menyerahkan semua perubahan hello.php tersebut. Dalam contoh pertama menggunakan opsi -m untuk memberikan baris perintah untuk mengirimkan komentar : \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git add hello.php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git status -s} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont A~ README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont A~ hello.php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $  $  \$  $ git commit -m '第一次版本提交'} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont [master (root-commit) d32cf1f] 第一次版本提交} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  2 files changed, 4 insertions(+)} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  create mode 100644 README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  create mode 100644 hello.php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  } \par
+
+\vspace{12pt}
+Sekarang telah mencatat snapshot. Jika di jalankan git status:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git status} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \#  $ On branch master} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont nothing to commit (working directory clean)} \par
+\vspace{12pt}
+\hspace*{0.5in} Output di atas menunjukkan bahwa setelah pengajuan terakhir, tidak membuat perubahan apapu. Jika tidak menetapkan opsi -m, Git mencoba untuk membuka editor untuk mengisi informasi yang disampaikan. Git jika tidak dapat menemukan informasi yang relevan dalam konfigurasi, default akan membuka vim. Layar akan terlihat seperti ini:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \#  $ Please enter the commit message for your changes. Lines starting} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \#  $ with ' $  \#  $' will be ignored, and an empty message aborts the commit.} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \#  $ On branch master} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \#  $ Changes to be committed:} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \#  $~~ (use "git reset HEAD <file>..." to unstage)} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \#  $} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \#  $~modified:~  hello.php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \#  $} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \sim  $} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \sim  $} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont ".git/COMMIT $  \_  $EDITMSG" 9L, 257C} \par
+\vspace{12pt}
+\hspace*{0.5in} Jika berpikir git add disampaikan proses cache yang terlalu rumit, Git juga memungkinkan untuk menggunakan opsi -a untuk melewatkan langkah ini. format perintah adalah sebagai berikut: \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont git commit -a} \par
+\vspace{12pt}
+\noindent 
+Memodifikasi file hello.php sebagai berikut:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont <?php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont echo '本教程：www.w3big.com';} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont echo '本教程：www.w3big.com';} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont ?>} \par
+\vspace{10pt}
+\noindent 
+Kemudian jalankan perintah berikut:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont git commit -am '修改 hello.php 文件'} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont [master 71ee2cb] 修改 hello.php 文件} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  1 file changed, 1 insertion(+)} \par
+\vspace{10pt}
+\hspace*{0.5in} Git reset perintah HEAD untuk menghapus konten cache.  Mari mengubah file berkas README, sebagai berikut:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \#  $ w3big Git 测试} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \#  $ 本教程 } \par
+\vspace{12pt}
+\noindent 
+File hello.php diubah sebagai berikut:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont <?php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont echo '本教程：www.w3big.com';} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont echo '本教程：www.w3big.com';} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont echo '本教程：www.w3big.com';} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont ?>} \par
+\vspace{10pt}
+\hspace*{0.5in} Sekarang setelah dua file diubah disampaikan ke zona penyangga, sekarang ingin membatalkan salah satu dari cache, sebagai berikut: \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git status -s} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  M README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  M hello.php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git add .} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git status -s} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont M~ README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont M~ hello.pp} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git reset HEAD -- hello.php } \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont Unstaged changes after reset:} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont M \hspace*{0.64in} hello.php} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git status -s} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont M~ README} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  M hello.php} \par
+\vspace{12pt}
+\hspace*{0.5in} Sekarang menjalankan git commit, perubahan hanya akan diserahkan berkas README, tapi hello.php tidak.  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git commit -m '修改'} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont [master f50cfda] 修改} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  1 file changed, 1 insertion(+)} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git status -s} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  M hello.php} \par
+\vspace{12pt}
+\hspace*{0.5in} Melihat file perubahan hello.php dan untuk pengajuan. Maka dapat menggunakan perintah berikut untuk memodifikasi hello.php menyerahkan:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git commit -am '修改 hello.php 文件'} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont [master 760f74d] 修改 hello.php 文件} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  1 file changed, 1 insertion(+)} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git status} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont On branch master} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont nothing to commit, working directory clean} \par
+\vspace{10pt}
+\hspace*{0.5in} Singkatnya, melakukan git reset HEAD untuk membatalkan sebelum git add untuk menambahkan, tetapi tidak ingin untuk memasukkan dalam cache snapshot di commit selanjutnya. \par
+\hspace*{0.5in} Entri rm git akan dihapus dari cache. ulang kepala git ini membatalkan entri cache yang berbeda. "Batal Cache", yang berarti bahwa pemulihan akan membuat perubahan ke cache.  Secara default, git file rm akan dihapus dari file cache dan hard drive  (direktori kerja). Jika ingin menyimpan file dalam direktori kerja, dapat menggunakangit rm --cached: Seperti kita menghapus hello.php file:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git rm hello.php } \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont rm 'hello.php'} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ ls} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont README} \par
+
+\vspace{50pt}
+Tidak menghapus file dari ruang kerja:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git rm --cached README } \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont rm 'README'} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ ls} \par
+\noindent
+{\fontsize{10pt}{10pt}\selectfont README} \par
+
+\vspace{10pt}
+\hspace*{0.5in} Git perintah mv untuk melakukan semua hal yanggit rm perintah operasi --cached,mengubah nama file pada disk, dan kemudian jalankan git add untuk menambahkan file baru ke cache.  README pertama kita hapus hanya menambahkan kembali:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ git add README } \par
+\vspace{12pt}
+\noindent 
+Kemudian nama yang sama yaitu:  \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $~git mv README  README.md} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont  $  \$  $ ls} \par
+\noindent 
+{\fontsize{10pt}{10pt}\selectfont README.md} 
+
+\section{Mendapatkan File untuk Pindah}
+\hspace*{0.5in} Buat salinan repositori A sehingga bisa memindahkannya tanpa terlalu mengkhawatirkan kesalahan. Sebaiknya hapus tautan ke repositori asli agar tidak sengaja membuat perubahan jarak jauh (baris 3). Ini berjalan melalui file, menghapus apapun yang tidak ada dalam direktori 1. Hasilnya adalah isi direktori 1 dipindahkan ke basis repositori A. Mengimpor file-file ini ke dalam repositori B di dalam direktori, jadi memindahkan semua menjadi satu sekarang (baris 5/6). Komit perubahan dan menggabungkan file-file ini ke dalam repositori yang baru \ref{PerpindahanFile} :
+\begin{figure}[ht]
+	\centerline{\includegraphics[width=0.50\textwidth]{Figures/PerpindahanFile}}
+	\caption{PerpindahanFile}
+	\label{PerpindahanFile}
+\end{figure}

@@ -1,0 +1,215 @@
+
+\section{Create Oprator}
+
+\vspace{\baselineskip}
+\begin{itemize}
+	\item Dasar Git
+\end{itemize}
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\subsection{Dasar-Dasar Git}
+	\vspace{\baselineskip}
+	\noindent 
+	{\fontsize{14pt}{14pt}\selectfont
+	 Jadi, sebenarnya apa yang dimaksud dengan Git? Ini adalah bagian penting untuk dipahami, karena jika anda memahami apa itu Git dan cara kerjanya, maka dapat dipastikan anda dapat menggunakan Git secara efektif dengan mudah. Selama mempelajari Git, cobalah untuk melupakan VCS lain yang mungkin telah anda kenal sebelumnya, misalnya Subversion dan Perforce. Git sangat berbeda dengan sistem-sistem tersebut dalam hal menyimpan dan memperlakukan informasi yang digunakan, walaupun antar-muka penggunanya hampir mirip. Dengan memahami perbedaan tersebut diharapkan dapat membantu anda menghindari kebingungan saat menggunakan Git. \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Salah satu perbedaan yang mencolok antar Git dengan VCS lainnya (Subversion dan kawan-kawan) adalah dalam cara Git memperlakukan datanya. Secara konseptual, kebanyakan sistem lain menyimpan informasi sebagai sebuah daftar perubahan berkas. Sistem seperti ini (CVS, Subversion, Bazaar, dan yang lainnya) memperlakukan informasi yang disimpannya sebagai sekumpulan berkas dan perubahan yang terjadi pada berkas-berkas tersebut, \\} \par
+
+\vspace{\baselineskip}
+\vspace{14pt}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Git tidak bekerja seperti ini. Melainkan, Git memperlakukan datanya sebagai sebuah kumpulan snapshot dari sebuah miniatur sistem berkas. Setiap kali anda melakukan commit, atau melakukan perubahan pada proyek Git anda, pada dasarnya Git merekam gambaran keadaan berkas-berkas anda pada saat itu dan menyimpan referensi untuk gambaran tersebut. Agar efisien, jika berkas tidak mengalami perubahan, Git tidak akan menyimpan berkas tersebut melainkan hanya pada file yang sama yang sebelumnya telah disimpan. \\} \par
+
+\vspace{\baselineskip}
+\vspace{14pt}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont perbedaan penting antara Git dengan hampir semua VCS lain. Hal ini membuat Git mempertimbangkan kembali hampir setiap aspek dari version control yang oleh kebanyakan sistem lainnya disalin dari generasi sebelumnya. Ini membuat Git lebih seperti sebuah miniatur sistem berkas dengan beberapa tool yang luar biasa ampuh yang dibangun di atasnya, ketimbang sekadar sebuah VCS. $  $ \\} \par
+
+ \vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Kebanyakan operasi pada Git hanya membutuhkan berkas-berkas dan resource lokal – tidak ada informasi yang dibutuhkan dari komputer lain pada jaringan anda. Jika Anda terbiasa dengan VCS terpusat dimana kebanyakan operasi memiliki overhead latensi jaringan, aspek Git satu ini akan membuat anda berpikir bahwa para dewa kecepatan telah memberkati Git dengan kekuatan. Karena anda memiliki seluruh sejarah dari proyek di lokal disk anda, dengan kebanyakan operasi yang tampak hampir seketika. \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Sebagai contoh, untuk melihat history dari proyek, Git tidak membutuhkan data histori dari server untuk kemudian menampilkannya untuk anda, namun secara sedarhana Git membaca historinya langsung dari basisdata lokal proyek tersebut. Ini berarti anda melihat histori proyek hampir secara instant. Jika anda ingin membandingkan perubahan pada sebuah berkas antara versi saat ini dengan versi sebulan yang lalu, Git dapat mencari berkas yang sama pada sebulan yang lalu dan melakukan pembandingan perubahan secara lokal, bukan dengan cara meminta remote server melakukannya atau meminta server mengirimkan berkas versi yang lebih lama kemudian membandingkannya secara lokal. \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Hal ini berarti bahwa sangat sedikit yang tidak bisa anda kerjakan jika anda sedang offline atau berada diluar VPN. Jika anda sedang berada dalam pesawat terbang atau sebuah kereta dan ingin melakukan pekerjaan kecil, anda dapat melakukan commit sampai anda memperoleh koneksi internet hingga anda dapat menguploadnya. Jika anda pulang ke rumah dan VPN client anda tidak bekerja dengan benar, anda tetap dapat bekerja. Pada kebanyakan sistem lainnya, melakukan hal ini cukup sulit atau bahkan tidak mungkin sama sekali. Pada Perforce misalnya, anda tidak dapat berbuat banyak ketika anda tidak terhubung dengan server; pada Subversion dan CVS, anda dapat mengubah berkas, tapi anda tidak dapat melakukan commit pada basisdata anda (karena anda tidak terhubung dengan basisdata). Hal ini mungkin saja bukanlah masalah yang besar, namun anda akan terkejut dengan perbedaan besar yang disebabkannya. \\} \par
+
+\vspace{\baselineskip}
+
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Segala sesuatu pada Git akan melalui proses checksum terlebih dahulu sebelum disimpan yang kemudian direferensikan oleh hasil checksum tersebut. Hal ini berarti tidak mungkin melakukan perubahan terhadap berkas manapun tanpa diketahui oleh Git. Fungsionalitas ini dimiliki oleh Git pada level terendahnya dan ini merupakan bagian tak terpisahkan dari filosofi Git. Anda tidak akan kehilangan informasi atau mendapatkan file yang cacat tanpa diketahui oleh Git. \\} \par
+
+\vspace{\baselineskip}
+\begin{itemize}
+	\item Secara umum git hanya menambah data
+\end{itemize}
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\subsection{Penjelasan git untuk menambah data}
+	
+	\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Ketika anda melakukan operasi pada Git, kebanyakan dari operasi tersebut hanya menambahkan data pada basisdata Git. It is very difficult to get the system to do anything that is not undoable or to make it erase data in any way. Seperti pada berbagai VCS, anda dapat kehilangan atau mengacaukan perubahan yang belum di-commit; namun jika anda melakukan commit pada Git, akan sangat sulit kehilanngannya, terutama jika anda secara teratur melakukan push basisdata anda pada repositori lain. \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Hal ini menjadikan Git menyenangkan karena kita dapat berexperimen tanpa kehawatiran untuk mengacaukan proyek. Untuk lebih jelas dan dalam lagi tentang bagaimana Git menyimpan datanya dan bagaimana anda dapat mengembalikan yang hilang, lihat "Under the Covers" pada Bab 9. \\} \par
+\vspace{\baselineskip}
+
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Sekarang perhatikan. Ini adalah hal utama yang harus diingat tentang Git jika anda ingin proses belajar anda berjalan lancar. Git memiliki 3 keadaan utama dimana berkas anda dapat berada: committed, modified dan staged. Committed berarti data telah tersimpan secara aman pada basisdata lokal. Modified berarti anda telah melakukan perubahan pada berkas namun anda belum melakukan commit pada basisdata. Staged berarti anda telah menandai berkas yang telah diubah pada versi yang sedang berlangsung untuk kemudian dilakukan commit. \\} \par
+
+\begin{itemize}
+	\item mulaioprasi
+\end{itemize}
+\begin{figure}[ht]
+	\centerline{\includegraphics[width=0.70\textwidth]{figures/mulaioprasi}}
+	\caption{oprasi}
+	\label{oprasi}
+\end{figure}
+
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Direktori Git adalah dimana Git menyimpan metadata dan database objek untuk projek anda. Ini adalah bahagian terpenting dari Git, dan inilah yang disalin ketika anda melakukan kloning sebuah repository dari komputer lain. \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Direktori kerja adalah sebuah checkout tunggal dari satu versi dari projek. Berkas-berkas ini kemudian ditarik keluar dari basisdata yang terkompresi dalam direktori Git dan disimpan pada disk untuk anda gunakan atau modifikasi. \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Staging area adalah sebuah berkas sederhana, umumnya berada dalam direktori Git anda, yang menyimpan informasi mengenai apa yang menjadi commit selanjutnya. Ini terkadang disebut sebagai index, tetapi semakin menjadi standard untuk menyebutnya sebagai staging area. \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Alur kerja dasar Git adalah seperti ini: \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Anda mengubah berkas dalam direktori kerja anda. \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Anda membawa berkas ke stage, menambahkan snapshotnya ke staging area. \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Anda melakukan commit, yang mengambil berkas seperti yang ada di staging area dan menyimpan snapshotnya secara permanen ke direktori Git anda. \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Jika sebuah versi tertentu dari sebuah berkas telah ada di direktori git, ia dianggap 'committed'. Jika berkas diubah (modified) tetapi sudah ditambahkan ke staging area, maka itu adalah 'staged'. Dan jika berkas telah diubah sejak terakhir dilakukan checked out tetapi belum ditambahkan ke staging area maka itu adalah 'modified' \\} \par
+\vspace{14pt}
+\vspace{14pt}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Mari memulai menggunakan Git. Pertama, tentu saja anda harus menginstallnya terlebih dahulu. Anda dapat melakukan melalui berbagai cara; dua cara paling poluler adalah menginstallnya dari kode sumbernya atau menginstalkan paket yang telah disediakan untuk platform anda. \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Jika anda dapat melakukannya, akan sangat berguna untuk dapat menginstallnya dari kode sumber, karena anda akan mendapatkan versi terbaru dari Git. Setiap versi dari Git cenderung akan menampilkan kemajuan pada sisi antarmuka pengguna, jadi menggunakan versi terbaru seringkali menjadi jalan terbaik jika anda terbiasa melakukan kompilasi perangkat lunak dari kode sumbernya. Dan juga menjadi masalah bahwa banyak distribusi Linux yang menyertakan versi Git yang sangat lama; kecuali anda mempergunakan distribusi Linux paling up-to-date atau menggunakan backport, menginstall dari kode sumbernya mungkin menjadi solusi terbaik. \\} \par
+
+\vspace{\baselineskip}
+\vspace{14pt}
+\noindent 
+{\fontsize{14pt}{14pt}\subsection {Setup Git Untuk Pertama Kalinya}
+	\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Sekarang anda telah memiliki Git pada sistem anda, berikutnya anda akan harus melakukan beberapa penyesuai pada lingkungan Git anda. Anda hanya perlu melakukan hal ini sekali saja; pada saat memperbaharui versi Git anda, penyesuai tidak perlu dilakukan lagi. Anda pun dapat mengubah penyesuaian tersebut setiap saat. \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont Pada Git terdapat sebuah perkakas yang disebut dengan git config yang memungkinkan anda untuk memperoleh informasi dan menetapkan variable konfigurasi yang mengontrol segala aspek bagaimana Git beroperasi dan berperilaku. Variable-variable ini dapat disimpan pada tiga tempat berbeda: gitconfig $  $file: Menyimpan berbagai nilai-nilai variable untuk setiap pengguna pada sistem dan semua repositori milik para pengguna tersebut. Jika anda memberikan opsi $  $--system $  $pada $  $git config, maka Git akan membaca dan menulis file konfigurasi ini secara spesifik. gitconfig $  $file: Spesifik hanya untuk pengguna yang bersangkutan. Anda dapat membuat Git membaca dan menulis pada berkas ini secara spesifik dengan memberikan opsi $  $--global. \\} \par
+
+\vspace{\baselineskip}
+\noindent 
+{\fontsize{14pt}{14pt}\selectfont config file pada direktori git (yaitu, $  $.git config) atau reposotori manapun yang sedang anda gunakan: Spesifik hanya pada repositori itu saja. Setiap nilai pada setiap tingkat akan selalu menimpa nilai yang telah ditetapkan pada level sebelumnya, jadi nilai yang telah di-set pada $  $.git configakan menimpa nilai yang telah di-set pada $  $gitconfig. \\} \par
+
+\noindent
+{\fontsize{14pt}{14pt}\subsection {Cek Status dari Berkas} 
+	
+	\vspace{14pt}
+	\noindent
+	{\fontsize{14pt}{14pt}\selectfont Anda
+	Alat utama yang Anda gunakan untuk menentukan berkas-berkas mana yang berada dalam keadaan tertentu adalah melalui perintah git status. Jika Anda menggunakan alat ini langsung setelah sebuah clone, Anda akan melihat serupa seperti di bawah ini:
+	git status
+	On branch master
+	nothing to commit, working directory clean
+	
+	\vspace{14pt}
+	\noindent
+	{\fontsize{14pt}{14pt}\selectfont 
+	Ini berarti Anda memiliki direktori kerja yang bersih-dengan kata lain, tidak ada berkas terpantau yang terubah. Git juga tidak melihat berkas-berkas yang tak terpantau, karena pasti akan dilaporkan oleh alat ini. Juga, perintah ini memberitahu Anda tentang cabang tempat Anda berada. Pada saat ini, cabang akan selalu berada di master, karena sudah menjadi default-nya; Anda tidak perlu khawatir tentang cabang dulu. Bab berikutnya akan membahas tentang percabangan dan referensi secara lebih detil.
+	
+	\vspace{14pt}
+	\noindent
+	{\fontsize{14pt}{14pt}\selectfont
+	Memantau Berkas Baru
+	Untuk mulai memantau berkas baru, Anda menggunakan perintah git add. Untuk mulai memantau berkas README tadi, Anda menjalankannya seperti berikut:
+	
+	\vspace{14pt}
+	\noindent
+	{\fontsize{14pt}{14pt}\selectfont
+	git add README
+	Jika Anda menjalankan perintah status lagi, Anda akan melihat bahwa berkas README Anda sekarang sudah terpantau dan sudah masuk ke dalam area stage:
+	\begin{verbatim}
+		
+	
+	git status
+	On branch master
+	Changes to be committed:
+	use git reset HEAD <file>... to unstage
+	new file:   README
+	
+	\end{verbatim}
+	
+	\vspace{14pt}
+	\noindent
+	{\fontsize{14pt}{14pt}\selectfont
+		
+		
+	Anda dapat mengatakan bahwa berkas tersebut berada di dalam area stage karena tertulis di bawah judul Changes to be committed. Jika Anda melakukan commit pada saat ini, versi berkas pada saat Anda menjalankan git add inilah yang akan dimasukkan ke dalam sejarah snapshot. Anda mungkin ingat bahwa ketika Anda menjalankan git init sebelumnya, Anda melanjutkannya dengan git add (nama berkas) yang akan mulai dipantau di direktori Anda. Perintah git add ini mengambil alamat dari berkas ataupun direktori; jika sebuah direktori, perintah tersebut akan menambahkan seluruh berkas yang berada di dalam direktori secara rekursif.
+	
+\vspace{14pt}
+	\noindent
+	{\fontsize{14pt}{14pt}\selectfont
+	Bekerja Berjarak
+	
+	\vspace{14pt}
+	\noindent
+	{\fontsize{14pt}{14pt}\selectfont
+	Untuk dapat berkolaborasi untuk proyek Git apapun, Anda perlu mengetahui bagaimana Anda dapat mengatur repositori berjarak dari jarak jauh. Repositori berjarak adalah sekumpulan versi dari proyek Anda yang disiarkan di Internet atau di jaringan. Anda dapat memiliki beberapa repositori berjarak, masing-masing bisanya dengan akses terbatas untuk membaca saja ataupun baca/tulis. Berkolaborasi dengan pihak lain menuntut kemampuan untuk mengatur repositori berjarak ini dan menarik dan mendorong data ke dan dari repositori berjarak tersebut ketika Anda butuh untuk membagi hasil kerja Anda.
+	
+	\vspace{14pt}
+	\noindent
+	{\fontsize{14pt}{14pt}\subsection
+	{Apakah Branch Itu}
+	\vspace{14pt}
+	\noindent
+	{\fontsize{14pt}{14pt}\selectfont
+	Untuk benar-benar mengerti cara Git melakukan branching, kita perlu kembali ke belakang dan membahas bagaimana Git menyimpan datanya. Seperti yang mungkin anda ingat dari Bab 1, Git tidak menyimpan data sebagai serangkaian kumpulan perubahan atau delta, melainkan sebagai serangkaian snapshot. Contoh :
+	
+	\begin{equation}
+	Create Operation
+	\end{equation}
+	
+	\vspace{14pt}
+	\noindent
+	{\fontsize{14pt}{14pt}\selectfont
+	Ketika anda melakukan commit dalam Git, Git menyimpan sebuah object commit yang berisi pointer ke snapshot dari konten yang anda staged, metadata pembuat (author) dan pesan (message), dan nol atau lebih pointer ke commit yang merupakan parent (induk) langsung dari commit ini: nol jika ini commit yang pertama, satu jika ini commit yang normal, dan beberapa jika ini commit yang dihasilkan dari gabungan antara dua atau lebih branch.
+	
+	\vspace{14pt}
+	\noindent
+	{\fontsize{14pt}{14pt}\selectfont
+	Hampir setiap VCS memiliki sejumlah dukungan atas branching (percabangan). Branching adalah membuat cabang dari repositori utama dan melanjutkan melakukan pekerjaan pada cabang yang baru tersebut tanpa perlu khawatir mengacaukan yang utama. Dalam banyak VCS, branching adalah proses yang agak mahal, karena seringkali mengharuskan anda untuk membuat salinan baru dari direktori kode sumber, dimana dapat memakan waktu lama untuk proyek-proyek yang besar.
+	
+	\vspace{14pt}
+	\noindent
+	{\fontsize{14pt}{14pt}\selectfont
+	Beberapa orang menyebut model branching dalam Git sebagai "killer feature," hal inilah yang membuat Git berbeda di komunitas VCS. Mengapa begitu istimewa? Cara Git membuat cabang sangatlah ringan, membuat operasi branching hampir seketika dan berpindah bolak-balik antara cabang umumnya sama cepatnya. Tidak seperti VCS lainnya, Git mendorong alur kerja dimana kita sering membuat cabang dan kemudian menggabungkannya, bahkan dapat beberapa kali dalam sehari. Memahami dan menguasai fitur ini memberi anda perangkat yang ampuh, unik, dan benar-benar dapat mengubah cara anda melakukan pengembangan (develop). \\} \par
+
