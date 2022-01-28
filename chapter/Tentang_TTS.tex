@@ -2,7 +2,7 @@ Sebelum mengetahui teknologi apa saja yang digunakan serta tata cara pembuatan s
 
 \section{Text to Speech (TTS)}
 Text to Speech merupakan proses pembuatan suara melalui inputan berupa text. mungkin teman-teman bingung, bagaimana bisa text berubah menjadi suara, sementara text itu hanya dapat kita lihat menggunakan panca indra kita yaitu mata sedangkan suara merupakan sesuatu yang tidak bisa kita lihat menggunakan mata tetapi bisa kita dengar menggunakan telingga. Text to Speech ini ada untuk menjawab kebingungan teman-teman tersebut. Di zaman sekarang ini, dimana teknologi sudah semakin canggih, mengubah teks menjadi suara bukanlah hal yang sulit untuk dilakukan, apalagi setelah teman-teman mengenal deep learning, machine learning, dan artificial intelligence. Bagi teman-teman yang masih belum kenal, yuk kenalan dulu.
-\begin{figure}[!htbp]
+\begin{figure}[H]
         \centerline{\includegraphics[scale=.75]{figures/korelasi}}
         \caption{Korelasi antara Deep Learning, Machine Learning, dan Artificial Intelligence}
 		\label{korelasi}
@@ -23,7 +23,7 @@ Machine Learning (ML) merupakan bagian dari Artificial Intelligence yang ditamba
 
 \subsection{Deep Learning}
 Setelah mengenal AI dan ML saatnya kita mengenal Deep Learning (DL) yang merupakan bagian dari Machine Learning yang berkaitan dengan algoritma yang berdasarkan pada struktur dan fungsi otak atau sering dikenal sebagai jaringan saraf tiruan. Pada dasarnya Deep Learning memiliki konsep seperti Machine Learning hanya saja dalam konteks yang lebih dalam. Contohnya, pada deep learning kita ingin membuat mesin dapat mengetahui apakah hewan yang ada digambar merupakan seekor anjing atau kucing, maka kita akan membuat algoritma untuk melakukan pengecekan seperti melakukan pengecekan pada bentuk ekor, bentuk telinga, apakah memiliki kumis atau tidak, dan ciri-ciri lainnya yang membuat kucing dan anjing terlihat berbeda tanpa kita perlu memberikan fitur pembedanya atau fitur mana yang lebih penting untuk dapat mengidentifikasi hewan tersebut secara manual. Deep Learning dapat mengetahui fitur tersebut tanpa kita beritahu secara manual seperti pada Machine Learning seperti terlihat pada gambar \ref{deep learning}. Oleh karena itu Deep Learning dianggap sebagai otak utama yang menciptakan kecerdasan buatan yang lebih manusiawi.
-\begin{figure}[!htbp]
+\begin{figure}[H]
         \centerline{\includegraphics[scale=.45]{figures/deeplearning}}
         \caption{Perbedaan Machine Learning dan Deep Learning}
 		\label{deep learning}
@@ -40,7 +40,7 @@ Cara kerja TTS terdiri dari 2 proses, dapat dilihat pada gambar \ref{cara kerja}
 \item Model spektogram ke audio, model ini akan mengonversi spektogram yang dihasilkan menjadi audio. Model ini disebut sebagai vocoder. beberapa model yang banyak digunakan untuk membuat vocoder yaitu WaveGlow, Griffin-Lim Algorithm, WaveNet, dll.
 Model Tacotron-2 sebagai model encoder-decoder dan model WaveNet yang dimodifikasi sebagai vocoder akan dibahas secara mendalam pada buku ini.
 \end{enumerate}
-\begin{figure}[!htbp]
+\begin{figure}[H]
         \centerline{\includegraphics[scale=.40]{figures/cara_kerja_tts}}
         \caption{Cara Kerja Text to Speech (TTS)}
 		\label{cara kerja}
