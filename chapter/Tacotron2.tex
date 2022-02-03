@@ -3,7 +3,7 @@ Tacotron 2 merupakan penelitian yang diteliti oleh Google pada bulan Desember 20
 ''Singkatnya cara kerjanya seperti ini: Kami menggunakan model urutan-ke-urutan yang dioptimalkan untuk TTS untuk memetakan urutan huruf ke urutan fitur yang mengkodekan audio. Fitur-fitur ini, spektogram audio 80-dimensi dengan bingkai yang dihitung setiap 12,5 milidetik, tidak hanya menangkap pengucapan kata-kata, tetapi juga berbagai seluk-beluk ucapan manusia, termasuk volume, kecepatan, dan intonasi. Akhirnya fitur ini diubah menjadi bentuk gelombang 24 kHz menggunakan arsitektur mirip WaveNet."
 
 \begin{figure}[H]
-        \centerline{\includegraphics[scale=.75]{figures/fig1}}
+        \centerline{\includegraphics[scale=.5]{figures/fig1}}
         \caption{Blok Diagram dari Arsitektur Tacotron 2}
 		\label{fig1}
 \end{figure}
@@ -36,17 +36,17 @@ Saya memutuskan untuk menggunakan pytorch untuk implementasi saya, melacak pelat
 Saya mereferensikan berbagai repositori github [ 1 , 2 ] untuk memahami makalah, implementasi, mengoreksi bug dalam kode saya sendiri. Karena kompleksitas alami dari pernyataan masalah, saya tidak bisa mendapatkan hasil pidato yang menakjubkan seperti manusia tetapi saya belajar banyak hal tentang Text-to-speech dan itu adalah tujuan utama ketika saya mulai mengerjakan proyek ini.
 Beberapa hasil untuk referensi:
 \begin{figure}[H]
-        \centerline{\includegraphics[scale=.75]{figures/ref1}}
+        \centerline{\includegraphics[scale=.35]{figures/ref1}}
         \caption{Spektogram mel yang diprediksi : Seperti yang dapat Anda bandingkan dengan wilayah atas, ia memiliki banyak celah dan masih membutuhkan banyak pelatihan. Sisi kanan (hijau solid) hanya padding dalam satu batch.}
 		\label{ref1}
 \end{figure}
 \begin{figure}[H]
-        \centerline{\includegraphics[scale=.75]{figures/ref2}}
+        \centerline{\includegraphics[scale=.35]{figures/ref2}}
         \caption{Target mel-spektogram}
 		\label{ref2}
 \end{figure}
 \begin{figure}[H]
-        \centerline{\includegraphics[scale=.75]{figures/ref3}}
+        \centerline{\includegraphics[scale=.5]{figures/ref3}}
         \caption{Perhatian (Seperti yang Anda lihat di sisi kiri bawah, sepertinya sedang belajar untuk menyelaraskan tetapi masih membutuhkan sekitar satu minggu pelatihan untuk mendapatkan diagonal yang sempurna untuk perhatian)}
 		\label{ref3}
 \end{figure}
