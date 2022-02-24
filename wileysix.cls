@@ -1843,7 +1843,9 @@ D R A F T\hfill\today, \realtime\hfill D R A F T\global\titlefalse\vss}}
 \vskip6.5pt
 
 {\locfont Penulis:}\\
-Dinda Majesty
+Dinda Majesty\\
+Rolly Maulana Awangga\\
+Mohamad Nurkamal Fauzan\\
 \vskip6.5pt
 
 ISBN : xxx-xxx-xxxxx-x-x
@@ -1854,7 +1856,7 @@ Rolly Maulana Awangga\\
 \vskip6.5pt
 
 {\locfont Penyunting:}\\
-Syafrial Fachrie Pane\\
+Muhammad Yusril Helmi Setyawan\\
 \vskip6.5pt
 
 {\locfont Desain sampul dan Tata letak:}\\

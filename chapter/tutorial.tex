@@ -5,7 +5,7 @@ Instalasi pada kali ini menggunakan 2 sistem operasi yaitu Windows 10 x64 dan Ub
 \subsection{Instalasi Anaconda 3 Windows 10 x64}
 Hal yang harus diperhatikan sebelum melakukan instalasi \textit{Anaconda Python}
 \begin{enumerate}
- \item \textit{Download Anaconda Python} https://www.anaconda.com/distribution/
+ \item \textit{Download Anaconda Python} \\ \url{https://www.anaconda.com/distribution/}
  \item Perhatikan versi dari sistem operasi yang digunakan (versi 32bit atau 64bit)
  \item Download file anaconda yang sesuai dengan versi sistem operasi (32bit atau 64bit)
 \end{enumerate}
@@ -121,17 +121,9 @@ Berikut cara mengupdate Anaconda:
 \end{enumerate}
 
 \subsection{Instalasi Anaconda Ubuntu 19.04}
-Untuk instalasi python pada Ubuntu 19.04 dibutuhkan sebagai berikut:
-
+Ikuti langkah berikut untuk instalasi python pada Ubuntu 19.04:
 \begin{enumerate}
-\item Internet
-\item Anaconda installer (64bit or 32bit)
-\item enter, dan yes atau no
-\end{enumerate}
-
-Ikuti langkah berikut:
-\begin{enumerate}
-\item Pertama kita kunjungi situs \textbf{\textit{https://www.anaconda.com/distribution/\#download-section}} seperti gambar ~\ref{anacondadownload} dan pilih \textbf{64-Bit (x86) Installer (517 MB)}
+\item Pertama kita kunjungi situs \\ \textbf{\textit{\url{https://www.anaconda.com/distribution/}\#download-section}} seperti gambar ~\ref{anacondadownload} dan pilih \textbf{64-Bit (x86) Installer (517 MB)}
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{figures/ubuntu/anacondadownload.png}
@@ -202,7 +194,10 @@ Setelah kita selesai instal Anaconda dan Spyder, selanjutnya kita akan mempelaja
 
 \begin{enumerate}
 
-\item pertama kita buka terminal kita lalu ketikkan perintah \textbf{export PYTHONPATH=\$PYTHONPATH:\textit{pathinstallasipythonkalian}} contoh seperti gambar \ref{setpath}, lalu enter
+\item pertama kita buka terminal kita lalu ketikkan perintah berikut, contoh seperti gambar \ref{setpath}, lalu tekan enter
+\begin{lstlisting}
+export PYTHONPATH=\$PYTHONPATH:pathinstallasipythonkalian
+\end{lstlisting}
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{figures/ubuntu/setpath.png}
@@ -215,7 +210,7 @@ Setelah kita selesai instal Anaconda dan Spyder, selanjutnya kita akan mempelaja
 \section{Instalasi Pycharm}
 Ikuti langkah-langkah berikut untuk install pycharm di sistem operasi windows:
 \begin{enumerate}
-\item Download Installer Pycharm dari situs resminya yaitu  https://www.jetbrains.com/pycharm/download.
+\item Download Installer Pycharm dari situs resminya yaitu \\  \url{https://www.jetbrains.com/pycharm/download}.
 \item Jalankan Installer PyCharm yang telah selesai di download, kemudian klik Next untuk melanjutkan installasi seperti pada contoh gambar \ref{installpycharm}.
 \begin{figure}[H]
 \centering
@@ -308,7 +303,7 @@ Berikut tata cara membuat akun github:
 \end{enumerate}
 
 \section{Download dan Install Git}
-Sebelum melakukan instalasi git, kita memerlukan file instalasi git terlebih dahulu. File ini bisa teman-teman dapatkan dengan mengunduh file dari situs resmi git, berikut link yang dapat teman-teman kunjungi https://git-scm.com/downloads. Download file yang sesuai dengan sistem operasi pada komputer teman-teman. Jika komputer teman-teman memiliki sistem operasi Windows 64bit maka teman-teman harus mengunduh file instalasi git untuk windows 64bit. Ikuti tahapan berikut untuk melakukan instalasi git:
+Sebelum melakukan instalasi git, kita memerlukan file instalasi git terlebih dahulu. File ini bisa teman-teman dapatkan dengan mengunduh file dari situs resmi git, berikut link yang dapat teman-teman kunjungi \\ \url{https://git-scm.com/downloads}. Download file yang sesuai dengan sistem operasi pada komputer teman-teman. Jika komputer teman-teman memiliki sistem operasi Windows 64bit maka teman-teman harus mengunduh file instalasi git untuk windows 64bit. Ikuti tahapan berikut untuk melakukan instalasi git:
 \begin{enumerate}
 \item Buka file instalasi git yang telah di download, kemudian klik next.
 \begin{figure}[H]
@@ -514,7 +509,7 @@ cat id_rsa.pub
 \section{Fork dan Clone Voice Cloning Repositori}
 berikut tutorial clone repo voice cloning menggunakan github:
 \begin{enumerate}
-\item Kunjungi link berikut https://github.com/dindamajesty13/Real-Time-Voice-Cloning
+\item Kunjungi link berikut \\ \url{https://github.com/dindamajesty13/Real-Time-Voice-Cloning}
 \item Klik fork, maka repo Real-Time-Voice-Cloning akan ada di github anda.
 \begin{figure}[H]
 \centering
@@ -597,12 +592,12 @@ Berikut tata pembuatan virtual environment untuk project voice cloning ini:
 
 \subsection{Download dan Install Python 3.7}
 \begin{enumerate}
-\item download python versi 3.7 pada website resmi python atau kunjungi link berikut https://www.python.org/downloads/release/python-371/
+\item download python versi 3.7 pada website resmi python atau kunjungi link berikut \url{https://www.python.org/downloads/release/python-371/}
 
 \item Pilih file yang sesuai dengan sistem operasi dan processor pada komputer teman-teman.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.4]{figures/python1}
+\includegraphics[scale=.35]{figures/python1}
 \caption{Download Python 3.7}
 \label{python1}
 \end{figure}
@@ -637,7 +632,7 @@ Berikut tata pembuatan virtual environment untuk project voice cloning ini:
 
 \begin{enumerate}
 
-\item Setelah menginstal python 3.7, kita harus menginstal ffmpeg, kunjungi link berikut untuk mendapatkan file instalasi ffmpeg https://ffmpeg.org/download.html. Sesuaikan file download dengan sistem operasi yang teman-teman gunakan. Pada tutorial ini saya menggunalan system operasi windows.
+\item Setelah menginstal python 3.7, kita harus menginstal ffmpeg, kunjungi link berikut untuk mendapatkan file instalasi ffmpeg \url{https://ffmpeg.org/download.html}. Sesuaikan file download dengan sistem operasi yang teman-teman gunakan. Pada tutorial ini saya menggunalan system operasi windows.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=.35]{figures/python5}
@@ -724,62 +719,211 @@ Berikut tata pembuatan virtual environment untuk project voice cloning ini:
 \end{enumerate}
 
 \subsection{Tutorial Membuat Virtual Environment}
+Berikut tutorial membuat virtual environment menggunakan pycharm dan python 3.7:
+\begin{enumerate}
+
+\item Buka settings pycharm dengan mengklik menu file lalu pilih settings. Pada menu Project Real-Time-Voice-Cloning pilih menu python interpreter.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/env1}
+\caption{Menu Settings Python Interpreter}
+\label{env1}
+\end{figure}
+
+\item Klik No interpreter lalu pilih show all maka akan muncul python interpreter seperti pada gambar \ref{env2}. Klik tanda tambah untuk membuat interpreter baru.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/env2}
+\caption{Python Interpreter}
+\label{env2}
+\end{figure}
+
+\item Pilih Virtual Environment, lalu pilih New Environment, isikan lokasi tempat environment disimpan dan isikan file exe python 3.7  pada base interpreter. Lalu klik OK.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/env3}
+\caption{Add Python Interpreter}
+\label{env3}
+\end{figure}
+
+\item Tunggu hingga proses creating virtual environment selesai.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/env4}
+\caption{Creating Virtual Environment}
+\label{env4}
+\end{figure}
+
+\item Pilih virtual environment yang telah kita buat lalu klik OK.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/env5}
+\caption{Pilih Virtual Environment}
+\label{env5}
+\end{figure}
+
+\item Berikut tampilan virtual environment yang telah kita buat menggunakan python 3.7.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/env6}
+\caption{Apply Virtual Environment}
+\label{env6}
+\end{figure}
+
+\item Pada kanan bawah pycharm teman-teman akan melihat progress bar yang menandakan pycharm sedang melakukan inisialisasi terhadap virtual environment teman-teman. Jalankan program apabila proses tersebut telah selesai.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/env7}
+\caption{Inisialisasi Virtual Environment}
+\label{env7}
+\end{figure}
+
+\end{enumerate}
 
 \subsection{Tutorial Membuat Conda Environment}
+Berikut tutorial membuat conda environment menggunakan pycharm dan python 3.7:
+\begin{enumerate}
+
+\item Buka settings pycharm dengan mengklik menu file lalu pilih settings. Pada menu Project Real-Time-Voice-Cloning pilih menu python interpreter.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/cenv1}
+\caption{Menu Settings Project}
+\label{cenv1}
+\end{figure}
+
+\item Klik No interpreter lalu pilih show all maka akan muncul python interpreter seperti pada gambar \ref{cenv2}. Klik tanda tambah untuk membuat interpreter baru.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/cenv2}
+\caption{Show All Interpreter}
+\label{cenv2}
+\end{figure}
+
+\item Pilih Conda Environment, lalu pilih New Environment.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/cenv3}
+\caption{Conda Environment}
+\label{cenv3}
+\end{figure}
+
+\item Isikan lokasi tempat conda environment disimpan, pilih python version 3.7  dan isikan lokasi file conda.exe pada conda executable. Lalu klik OK. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/cenv4}
+\caption{Create New Conda Environment}
+\label{cenv4}
+\end{figure}
+
+\item Tunggu hingga proses pembuatan conda environment selesai. 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/cenv5}
+\caption{Creating Conda Environment}
+\label{cenv5}
+\end{figure}
+
+\item Berikut tampilan conda environment yang telah kita buat, klik Apply lalu klik OK.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/cenv6}
+\caption{Apply Conda Environment}
+\label{cenv6}
+\end{figure}
+
+\item Tunggu hingga proses inisialisasi conda environment selesai, jika sudah teman-teman bisa menginstalkan requirements yang teman-teman gunakan dan menjalankan program yang ingin dijalankan.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/cenv7}
+\caption{Progress Bar Inisialisasi Conda Environment}
+\label{cenv7}
+\end{figure}
+
+\end{enumerate}
 
 \subsection{Install Requirements}
 Perhatikan struktur folder project voice cloning teman-teman maka akan terlihat file dengan nama requirements.txt, file tersebut berisikan library-library yang digunakan dalam project ini. Library tersebut harus diinstall terlebih dahulu agar project dapat dijalankan dengan baik. Berikut tata cara instalasi requirements:
 \begin{enumerate}
 \item Jika teman-teman menggunakan conda environment maka buka anaconda prompt dan ketikkan perintah berikut untuk pindah directory dan mengaktifkan conda environment:
-\begin{verbatim}
-cd conda/envs
+\begin{lstlisting}
+cd ProgramData/Anaconda3/envs
 conda activate your_environment
-\end{verbatim}
+\end{lstlisting}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch1}
-\caption{Select Pytorch with Conda}
-\label{pytorch1}
+\includegraphics[scale=.4]{figures/req4}
+\caption{Activate Conda Environment}
+\label{req4}
+\end{figure}
+
+\item Ketikkan perintah berikut untuk menginstal pip, tunggu hingga proses instalasi selesai.
+\begin{lstlisting}
+conda install -c anaconda pip
+\end{lstlisting}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/req5}
+\caption{Install Pip using Anaconda Prompt}
+\label{req5}
 \end{figure}
 
 \item Ketikkan perintah berikut untuk menginstal requirements, tunggu hingga proses instalasi selesai.
-\begin{verbatim}
-pip install -r requirements.txt
-\end{verbatim}
+\begin{lstlisting}
+pip install -r C:\Users\Angga\Real-Time-Voice-Cloning\requirements.txt
+\end{lstlisting}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch1}
-\caption{Select Pytorch with Conda}
-\label{pytorch1}
+\includegraphics[scale=.4]{figures/req6}
+\caption{Install Requirements using Anaconda Prompt}
+\label{req6}
+\end{figure}
+
+\item Pastikan requirements telah terinstall, buka python interpreter untuk melakukan pengecekan.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/req7}
+\caption{Sukses Install Requirements pada Conda Environment}
+\label{req7}
 \end{figure}
 
 \item Jika teman-teman menggunakan virtual environment maka buka command prompt dan ketikkan perintah berikut untuk pindah directory dan mengaktifkan virtual environment:
-\begin{verbatim}
+\begin{lstlisting}
 cd your-project
-source my-env/bin/activate
-\end{verbatim}
+.\venv\Scripts\activate
+\end{lstlisting}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch1}
-\caption{Select Pytorch with Conda}
-\label{pytorch1}
+\includegraphics[scale=.4]{figures/req1}
+\caption{Activate Virtual Environment with Command Prompt}
+\label{req1}
 \end{figure}
 
 \item Ketikkan perintah berikut untuk menginstal requirements, tunggu hingga proses instalasi selesai.
-\begin{verbatim}
-conda install --file requirements.txt
-\end{verbatim}
+\begin{lstlisting}
+pip install -r requirements.txt
+\end{lstlisting}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch1}
-\caption{Select Pytorch with Conda}
-\label{pytorch1}
+\includegraphics[scale=.4]{figures/req2}
+\caption{Install Requirements using Command Prompt}
+\label{req2}
 \end{figure}
 
+\item Pastikan semua library yang dibutuhkan telah terinstall, buka Settings lalu ke menu python interpreter maka teman-teman akan melihat library yang telah berhasil diinstall pada interpreter teman-teman seperti pada gambar \ref{req3}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.4]{figures/req3}
+\caption{Berhasil Install Requirement pada Virtual Environment}
+\label{req3}
+\end{figure}
 \end{enumerate}
 
 \subsection{Download and install Pytorch dengan Anaconda}
@@ -787,7 +931,7 @@ Pytorch merupakan library open source yang digunakan dalam pengembangan dan pela
 
 Berikut cara instalasi Pytorch:
 \begin{enumerate}
-\item Kunjungi situs web pytorch, berikut link website https://pytorch.org/.
+\item Kunjungi situs web pytorch, berikut link website \url{https://pytorch.org/}.
 \item Perhatikan gambar \ref{pytorch1}. Pastikan teman-teman memilih stable build pytorch dan menyesuaikan sistem operasi dengan komputer teman-teman. Apabila teman-teman menggunakan conda environment maka pilih conda dan bahasa pemrograman python. Jika teman-teman menggunakan GPU maka select Cuda dengan versi yang teman-teman inginkan, pilih CPU apabila menggunakan CPU. Pada run this command teman-teman akan melihat perinta instalasi menggunakan conda, lalu copy perintah tersebut.
 \begin{figure}[H]
 \centering
@@ -798,7 +942,7 @@ Berikut cara instalasi Pytorch:
 
 \item Jika teman-teman menggunakan conda environment, buka anaconda prompt, lalu ketikkan perintah berikut untuk pindah direktori.
 \begin{verbatim}
-cd conda/envs
+cd ProgramData/Anaconda3/envs
 \end{verbatim}
 perintah ini untuk mengaktifkan conda environment teman-teman. Ganti your-environment dengan nama conda environment yang sebelumnya telah teman-teman buat.
 \begin{verbatim}
@@ -806,35 +950,47 @@ conda activate your-environment
 \end{verbatim}
 
 \item Jika conda environment telah aktif maka teman-teman paste kan perintah yang telah di copy sebelumnya lalu tekan enter.
+\begin{lstlisting}
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
+\end{lstlisting}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch2}
-\caption{Select Pytorch with Pip}
-\label{pytorch2}
+\includegraphics[scale=.35]{figures/pytorch9}
+\caption{Install Pytorch with Anaconda Prompt}
+\label{pytorch9}
 \end{figure}
 
-\item Tunggu hingga proses instalasi Pytorch selesai.
+\item Ketikkan y lalu tekan enter. Tunggu hingga proses instalasi Pytorch selesai.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch2}
-\caption{Select Pytorch with Pip}
-\label{pytorch2}
+\includegraphics[scale=.35]{figures/pytorch8}
+\caption{Proses Install Pytorch with Anaconda Prompt}
+\label{pytorch8}
+\end{figure}
+
+\item Apabila instalasi telah selesai maka teman-teman bisa melakukan pengecekan pada package pytorch yang telah di install.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=.35]{figures/pytorch10}
+\caption{Instalasi Pytorch Selesai}
+\label{pytorch10}
 \end{figure}
 
 \item untuk memastikan apakah pytorch sudah berhasil di install maka teman-teman dapat melakukan pengecekan dengan cara mengetikkan perintah python lalu tekan enter.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch2}
-\caption{Select Pytorch with Pip}
-\label{pytorch2}
+\includegraphics[scale=.35]{figures/pytorch11}
+\caption{Check Instalasi Pytorch}
+\label{pytorch11}
 \end{figure}
+
 
 \item Selanjutnya teman-teman ketikkan perintah import torch lalu tekan enter.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch2}
-\caption{Select Pytorch with Pip}
-\label{pytorch2}
+\includegraphics[scale=.65]{figures/pytorch12}
+\caption{Import Pytorch}
+\label{pytorch12}
 \end{figure}
 
 \item Ketikkan perintah berikut untuk melihat versi pytorch yang telah berhasil di install.
@@ -843,9 +999,9 @@ conda activate your-environment
 \end{verbatim}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch2}
-\caption{Select Pytorch with Pip}
-\label{pytorch2}
+\includegraphics[scale=.5]{figures/pytorch13}
+\caption{Print Pytorch Version}
+\label{pytorch13}
 \end{figure}
 
 \end{enumerate}
@@ -853,51 +1009,55 @@ conda activate your-environment
 \subsection{Download and install Pytorch dengan Pip}
 Berikut cara instalasi Pytorch menggunakan pip
 \begin{enumerate}
-\item Kunjungi situs web pytorch, berikut link website https://pytorch.org/.
+\item Kunjungi situs web pytorch, berikut link website \url{https://pytorch.org/}.
 
 \item Perhatikan gambar \ref{pytorch2}. Pastikan teman-teman memilih stable build pytorch dan menyesuaikan sistem operasi dengan komputer teman-teman. Apabila menggunakan virtual environment maka pilih Pip lalu copy perintah pada run this command.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch2}
+\includegraphics[scale=.45]{figures/pytorch2}
 \caption{Select Pytorch with Pip}
 \label{pytorch2}
 \end{figure}
 
-\item Jika teman-teman menggunakan virtual environment, buka terminal pada Pycharm, lalu ketikkan perintah berikut untuk mengaktifkan virtual environment teman-teman. Ganti my-env dengan nama environment yang telah teman-teman buat sebelumnya.
+\item Jika teman-teman menggunakan virtual environment, buka command prompt, lalu ketikkan perintah berikut untuk mengaktifkan virtual environment teman-teman. Ganti my-env dengan nama environment yang telah teman-teman buat sebelumnya.
 \begin{verbatim}
-source my-env/bin/activate
+.\my-env\Scripts\activate
 \end{verbatim}
 
 \item Jika virtual environment telah aktif maka teman-teman paste kan perintah yang telah di copy sebelumnya lalu tekan enter.
+\begin{lstlisting}
+pip3 install torch==1.10.2+cu102 torchvision==0.11.3+cu102 torchaudio===0.10.2+cu102 -f https://download.pytorch.org/whl/cu102/torch_stable.html
+\end{lstlisting}
+
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch2}
-\caption{Select Pytorch with Pip}
-\label{pytorch2}
+\includegraphics[scale=.35]{figures/pytorch3}
+\caption{Install Pytorch with Pip}
+\label{pytorch3}
 \end{figure}
 
-\item Tunggu hingga proses instalasi Pytorch selesai.
+\item Tunggu hingga proses instalasi Pytorch selesai. Buka python interpreter dan lihat apakah package pytorch sudah ada atau belum.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch2}
-\caption{Select Pytorch with Pip}
-\label{pytorch2}
+\includegraphics[scale=.35]{figures/pytorch4}
+\caption{Install Pytorch Berhasil}
+\label{pytorch4}
 \end{figure}
 
 \item untuk memastikan apakah pytorch sudah berhasil di install maka teman-teman dapat melakukan pengecekan dengan cara mengetikkan perintah python lalu tekan enter.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch2}
-\caption{Select Pytorch with Pip}
-\label{pytorch2}
+\includegraphics[scale=.35]{figures/pytorch5}
+\caption{Check Version Pytorch}
+\label{pytorch5}
 \end{figure}
 
 \item Selanjutnya teman-teman ketikkan perintah import torch lalu tekan enter.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch2}
-\caption{Select Pytorch with Pip}
-\label{pytorch2}
+\includegraphics[scale=.35]{figures/pytorch6}
+\caption{Import Torch}
+\label{pytorch6}
 \end{figure}
 
 \item Ketikkan perintah berikut untuk melihat versi pytorch yang telah berhasil di install.
@@ -906,9 +1066,9 @@ print(torch.__version__)
 \end{verbatim}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=.35]{figures/pytorch2}
-\caption{Select Pytorch with Pip}
-\label{pytorch2}
+\includegraphics[scale=.35]{figures/pytorch7}
+\caption{Print Torch Version}
+\label{pytorch7}
 \end{figure}
 
 \end{enumerate}

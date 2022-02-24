@@ -11,10 +11,10 @@ Hal ini memungkinkan setiap bagian dilatih pada data independen, sehingga mengur
 \subsection{Speaker Encoder}
 
 Bagian pertama dari model SV2TTS adalah encoder speaker.
-Tugas speaker encoder adalah mengambil beberapa input audio (dikodekan sebagai bingkai spektogram mel), dari speaker tertentu, dan mengeluarkan embedding yang menangkap "bagaimana suara speaker". Encoder pembicara tidak peduli dengan kata-kata yang diucapkan pembicara, atau tentang kebisingan di latar belakang, yang dia pedulikan hanyalah suara pembicara, misalnya, suara bernada tinggi/rendah, aksen, nada, dll. Semua fitur ini digabungkan menjadi vektor berdimensi rendah, yang secara formal dikenal sebagai vektor-d, atau secara informal sebagai penyematan speaker. Akibatnya, ujaran yang diucapkan oleh penutur yang sama akan saling berdekatan pada penyematan penutur, sedangkan tuturan yang diucapkan oleh penutur yang berbeda akan berjauhan pada penyematan penutur.
+Tugas speaker encoder adalah mengambil beberapa input audio (dikodekan sebagai bingkai spektogram mel), dari speaker tertentu, dan mengeluarkan embedding yang menangkap "bagaimana suara speaker". Encoder pembicara tidak peduli dengan kata-kata yang diucapkan pembicara, atau tentang kebisingan di latar belakang, yang dia pedulikan hanyalah suara pembicara, misalnya, suara bernada tinggi/rendah, aksen, nada, dll. Semua fitur ini digabungkan menjadi vektor berdimensi rendah, yang secara formal dikenal sebagai vektor-d, atau secara informal sebagai penyematan speaker. Akibatnya, ujaran yang diucapkan oleh penutur yang sama akan saling berdekatan pada penyematan penutur, sedangkan tuturan yang diucapkan oleh penutur yang berbeda akan berjauhan pada penyematan penutur\cite{8999436, DBLP:journals/corr/HeigoldMBS15}.
 \begin{figure}[H]
         \centerline{\includegraphics[scale=.35]{figures/encoder}}
-        \caption{Representasi visual dari embeddings, setiap warna adalah speaker yang berbeda Sumber: Jia, Zhang, dan Weiss et al.}
+        \caption{Representasi visual dari embeddings, setiap warna adalah speaker yang berbeda\cite{DBLP:journals/corr/abs-1806-04558}}
 		\label{encoder}
 \end{figure}
 
@@ -30,7 +30,7 @@ Synthesizer adalah bagian dari SV2TTS yang menganalisis input teks untuk membuat
 Synthesizer mengambil urutan teks — dipetakan ke fonem (unit terkecil dari suara manusia, misalnya, suara yang Anda buat saat mengucapkan 'a'), bersama dengan embeddings yang dihasilkan oleh encoder speaker, dan menggunakan arsitektur Tacotron 2 untuk menghasilkan bingkai dari spektogram mel secara berulang
 \begin{figure}[H]
         \centerline{\includegraphics[scale=.35]{figures/model}}
-        \caption{Model Arsitektur Multi-Speaker Voice Cloning Sumber: Jia, Zhang, dan Weiss et al.}
+        \caption{Model Arsitektur Multi-Speaker Voice Cloning \cite{DBLP:journals/corr/abs-1806-04558}}
 		\label{model}
 \end{figure}
 
@@ -46,16 +46,16 @@ Berikut Proses Training Synthesizer:
 
 \begin{figure}[H]
         \centerline{\includegraphics[scale=.35]{figures/train}}
-        \caption{Training Synthesizer Sumber: Jia, Zhang, dan Weiss et al.}
+        \caption{Training Synthesizer\cite{DBLP:journals/corr/abs-1806-04558}}
 		\label{train}
 \end{figure}
 
 \subsection{Vocoder}
 Pada titik ini, synthesizer telah membuat spektogram mel, tetapi kami masih belum dapat mendengarkan apa pun. Untuk mengubah spektogram mel menjadi gelombang audio mentah, penulis menggunakan vocoder.
-Vocoder khusus yang digunakan di sini didasarkan pada model WaveNet DeepMind , yang menghasilkan bentuk gelombang audio mentah dari teks, dan pada satu titik canggih untuk sistem TTS.
+Vocoder khusus yang digunakan di sini didasarkan pada model WaveNet DeepMind , yang menghasilkan bentuk gelombang audio mentah dari teks, dan pada satu titik canggih untuk sistem TTS\cite{DBLP:journals/corr/OordDZSVGKSK16}.
 \begin{figure}[H]
         \centerline{\includegraphics[scale=.35]{figures/vocoder}}
-        \caption{Vocoder Sumber: Jia, Zhang, dan Weiss et al.}
+        \caption{Vocoder\cite{DBLP:journals/corr/abs-1806-04558}}
 		\label{vocoder}
 \end{figure}
 
@@ -74,14 +74,14 @@ Kealamian mengukur seberapa "manusia" ucapan itu terdengar, sementara kesamaan m
 Penilai berinteraksi melalui GUI yang terlihat seperti:
 \begin{figure}[H]
         \centerline{\includegraphics[scale=.45]{figures/nilai}}
-        \caption{Pengukuran Kualitas Model Sumber: Jia, Zhang, dan Weiss et al.}
+        \caption{Pengukuran Kualitas Model\cite{DBLP:journals/corr/abs-1806-04558}}
 		\label{nilai}
 \end{figure}
 Teknik penggunaan rating crowdsourced seperti ini sering disebut dengan Mean Opinion Score atau MOS.
 Penulis menemukan bahwa hasil akhir untuk kealamian akhirnya terlihat seperti:
 \begin{figure}[H]
         \centerline{\includegraphics[scale=.45]{figures/hasil}}
-        \caption{MOS Sumber: Jia, Zhang, dan Weiss et al.}
+        \caption{MOS \cite{DBLP:journals/corr/abs-1806-04558}}
 		\label{mos}
 \end{figure}
 
@@ -95,7 +95,7 @@ Jika Anda ingin analisis lengkap ini, saya akan merekomendasikan membaca bagian 
 Dan untuk kesamaan ucapan, hasilnya terlihat seperti:
 \begin{figure}[H]
         \centerline{\includegraphics[scale=.35]{figures/hasil1}}
-        \caption{Speech Similarity Sumber: Jia, Zhang, dan Weiss et al.}
+        \caption{Speech Similarity\cite{DBLP:journals/corr/abs-1806-04558}}
 		\label{similar}
 \end{figure}
 Sekali lagi, Anda mungkin ingin membaca bagian 3.2 dari makalah asli untuk analisis lengkapnya. Tapi secara ringkas:
