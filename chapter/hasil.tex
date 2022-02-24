@@ -408,3 +408,24 @@ else:
 \end{enumerate}
 
 \section{Pembahasan Error dan Solusi}
+Berikut beberapa error dan solusinya yang saya temui pada saat pembuatan project ini:
+
+\begin{enumerate}
+
+\item librosa.util.exceptions.ParameterError: Audio buffer is not finite everywhere \\
+Error ini dapat terjadi karena adanya nan value pada audio dataset teman-teman. Jadi pastikan file audio pada dataset teman-teman sebelum melakukan preprocessing dan training model agar terhindar dari error ini
+
+\item RuntimeError: cuDNN error: CUDNN\_STATUS\_EXECUTION\_FAILED \\
+Error ini biasanya terjadi karena versi CUDA, cuDNN, dan Pytorch yang tidak sesuai. Saya menyarankan teman-teman untuk menginstal ulang pytorch dengan versi yang sesuai.
+
+\item RuntimeError: CUDA out of memory. \\
+Error ini terjadi akibat kapasitas penyimpanan GPU mencapai maksimal dan tidak ada lagi ruang kosong tersisa. Pastikan teman-teman menggunakan GPU yang lebih baik dengan kapasitas yang lebih besar, upgrade GPU, atau jika memiliki keterbatasan biaya teman-teman bisa menggunakan Google Colab atau menggunakan CPU. Penggunaan CPU tidak disarankan karena lambat dan menyita banyak waktu.
+
+\item RuntimeError: cuDNN error: CUDNN\_STATUS\_MAPPING\_ERROR \\
+Error ini terjadi ketika versi PyTorch tidak cocok dengan versi CUDA atau GPU sudah tidak didukung karena terlalu tua. Saya sarankan untuk mendapatkan GPU yang lebih baru, menurut saya teman-teman setidaknya menggunakan GTX 1080Ti.
+
+\item audioread.NoBackendError \\
+Error ini terjadi ketika file audio memiliki format selain .wav. Jika teman-teman menggunakan file audio dengan format .mp3 atau .flac maka pastikan teman-teman menginstall ffmpeg pada laptop atau komputer teman-teman.
+
+
+\end{enumerate}
