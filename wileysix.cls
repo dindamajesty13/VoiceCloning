@@ -495,9 +495,9 @@ This version is dated \currversion^^J^^J}
 {\frenchspacing\baselineskip=12pt
 \authorfont \theauthor\vskip1sp}
 \vfill
-\noindent{\includegraphics[width=1.7in]{Figures/kreatiflogo}}
+\noindent{\includegraphics[width=1.7in]{Figures/bukupedia}}
 \vskip-8pt
-{\wileyfont Kreatif Industri Nusantara}
+{\wileyfont }
 \vskip24pt}\newpage}
 
 \def\affil#1{{\affilfont #1}\vskip18pt}
@@ -1864,14 +1864,14 @@ Dinda Majesty
 \vskip6.5pt
 
 {\locfont Penerbit:}\\
-Kreatif Industri Nusantara
+Bukupedia
 \vskip6.5pt
 
 {\locfont Redaksi:}\\
-Jl. Ligar Nyawang No. 2 \\
-Bandung 40191\\
-Tel. 022 2045-8529\\
-Email : awangga@kreatif.co.id\\
+Athena Residence Blok. E No. 1, Desa Ciwaruga, Kec.Parongpong\\
+Kab. Bandung Barat 40559\\
+Tel. +628-775-2000-300\\
+Email : penerbit@bukupedia.co.id\\
 \vskip6.5pt
 
 {\locfont Distributor:}\\
@@ -1919,7 +1919,7 @@ volume.} \vskip24pt\egroup
 \advance\hsize -10pt \raggedright
 \footnotesize{\it #1. }\\{By #2}
 \noindent\hbox{\footnotesize
-Copyright \copyright\ \thecopyrightyear\ Kreatif Industri Nusantara.}}}
+Copyright \copyright\ \thecopyrightyear\ Bukupedia.}}}
 
 
 \def\offprintinfo#1#2{
